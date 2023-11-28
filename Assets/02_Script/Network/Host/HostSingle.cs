@@ -1,18 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class HostSingle : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    private static HostSingle instance;
+    public static HostSingle Instance
     {
-        
+
+        get
+        {
+
+            if (instance != null) return instance;
+
+            instance = FindObjectOfType<HostSingle>();
+
+            if (instance == null)
+            {
+
+                Debug.LogError("?");
+
+            }
+
+            return instance;
+
+        }
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public HostGameManager GameManager { get; private set; }
+
+    public void CreateHost()
     {
-        
+
+        GameManager = new HostGameManager();
+
     }
+
 }

@@ -23,10 +23,6 @@ public class ClientGameManager
     private NetworkManager networkManager;
     private JoinAllocation allocation;
 
-
-    /// <summary>
-    /// 연결 끊어짐
-    /// </summary>
     public void Disconnect()
     {
 
@@ -37,16 +33,10 @@ public class ClientGameManager
 
         }
 
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(SceneList.MenuScene);
 
     }
 
-    /// <summary>
-    /// 클라이언트를 만들고 시작함
-    /// </summary>
-    /// <param name="joinCode">입장 코드</param>
-    /// <param name="data">유저 데이터</param>
-    /// <returns></returns>
     public async Task StartClientAsync(string joinCode, UserData data)
     {
 
