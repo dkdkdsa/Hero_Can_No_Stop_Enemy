@@ -43,7 +43,7 @@ public abstract class TowerRoot : NetworkBehaviour
     private IEnumerator AttackDelayCo()
     {
 
-        
+        yield return null;
 
     }
 
