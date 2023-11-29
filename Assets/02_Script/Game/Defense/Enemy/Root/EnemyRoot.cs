@@ -56,6 +56,7 @@ public class EnemyRoot : NetworkBehaviour
         {
 
             transform.position = ownerPos;
+            DefenseManager.Instance.AddEnemy(NetworkObject);
             SetDir(Vector2.up);
 
         }

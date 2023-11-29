@@ -23,7 +23,7 @@ public class DefenseManager : NetworkBehaviour
     [SerializeField] private Transform ownerPoint;
     [SerializeField] private Transform otherPoint;
 
-    private List<NetworkObject> enemyList;
+    private List<NetworkObject> enemyList = new();
 
     public List<TowerObj> towerList = new();
     public static DefenseManager Instance;
@@ -98,6 +98,13 @@ public class DefenseManager : NetworkBehaviour
 
     }
 
+    public List<NetworkObject> GetEnemys()
+    {
+
+        return enemyList;
+
+    }
+
     private IEnumerator EnemySpawnCo()
     {
 
@@ -111,11 +118,10 @@ public class DefenseManager : NetworkBehaviour
             foreach(var id in clients)
             {
 
+                Debug.Log(id);
                 SpawnEnemyServerRPC("Debug", id);
 
             }
-
-            Debug.Log(123);
 
             yield return new WaitForSeconds(1);
 

@@ -11,7 +11,7 @@ public class RoadEnd : MonoBehaviour
         if (collision.transform.CompareTag("Enemy"))
         {
 
-            Destroy(collision.gameObject);
+            collision.transform.GetComponent<EnemyRoot>().DestroyObjectServerRPC();
 
         }
 
