@@ -15,6 +15,7 @@ public class EnemyRoot : NetworkBehaviour
     private void Awake()
     {
 
+        rigid = GetComponent<Rigidbody2D>();
         hp = maxHP;
 
     }
@@ -58,6 +59,14 @@ public class EnemyRoot : NetworkBehaviour
             SetDir(Vector2.up);
 
         }
+
+    }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void DestroyObjectServerRPC()
+    {
+
+        Destroy(gameObject);
 
     }
 

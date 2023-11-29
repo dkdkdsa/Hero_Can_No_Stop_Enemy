@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RoadEnd : MonoBehaviour
 {
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
 

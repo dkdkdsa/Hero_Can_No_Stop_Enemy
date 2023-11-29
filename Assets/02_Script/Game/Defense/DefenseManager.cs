@@ -18,10 +18,12 @@ public class DefenseManager : NetworkBehaviour
 
     [SerializeField] private EnemyListSO enemyData;
 
+    [Space]
     [Header("EnemyWave")]
-    [SerializeField] private Transform ownerPoint, otherPoint;
+    [SerializeField] private Transform ownerPoint;
+    [SerializeField] private Transform otherPoint;
 
-    private Dictionary<ulong, List<NetworkObject>> cliendIdToenemyListDic;
+    private List<NetworkObject> enemyList;
 
     public List<TowerObj> towerList = new();
     public static DefenseManager Instance;
@@ -33,14 +35,18 @@ public class DefenseManager : NetworkBehaviour
 
     }
 
-    private void Start()
+    public override void OnNetworkSpawn()
     {
 
-        if (!IsServer) return;
+        if (IsServer)
+        {
 
-        StartCoroutine(EnemySpawnCo());
+            StartCoroutine(EnemySpawnCo());
+
+        }
 
     }
+
 
     [ServerRpc(RequireOwnership = false)]
     public void SpawnTowerServerRPC(string towerPrefab, Vector2 originPos, ulong clientId)
@@ -85,12 +91,19 @@ public class DefenseManager : NetworkBehaviour
 
     }
 
+    public void AddEnemy(NetworkObject netObj)
+    {
+
+        enemyList.Add(netObj);
+
+    }
+
     private IEnumerator EnemySpawnCo()
     {
 
-        yield return null;
-
         var clients = NetworkManager.Singleton.ConnectedClientsIds;
+
+        yield return new WaitForSeconds(3f);
 
         while (true)
         {
@@ -101,6 +114,10 @@ public class DefenseManager : NetworkBehaviour
                 SpawnEnemyServerRPC("Debug", id);
 
             }
+
+            Debug.Log(123);
+
+            yield return new WaitForSeconds(1);
 
         }
 
