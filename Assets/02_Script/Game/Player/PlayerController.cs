@@ -6,12 +6,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    [SerializeField] private AreaObject spawnAbleArea;
+    [SerializeField] private AreaObject moveAbleArea;
+    [Space]
     [SerializeField] private float moveSpeed;
+
+    public bool MoveAble;
 
     private void Update()
     {
 
-        var dir = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        Move();
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
@@ -19,6 +24,25 @@ public class PlayerController : MonoBehaviour
             var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
             DefenseManager.Instance.SpawnTowerServerRPC("Debug", pos, NetworkManager.Singleton.LocalClientId);
+
+        }
+
+    }
+
+    private void Move()
+    {
+
+        if (!MoveAble) return;
+
+        var dir = new Vector3(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        dir.Normalize();
+
+        var nextPos = transform.position + dir * Time.deltaTime * moveSpeed;
+
+        if(moveAbleArea.ChackContains(nextPos))
+        {
+
+            transform.position = nextPos;
 
         }
 

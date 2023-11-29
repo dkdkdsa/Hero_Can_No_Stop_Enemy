@@ -18,9 +18,12 @@ public class LobbySceneUIController : NetworkBehaviour
 
     }
 
-    private void OnDestroy()
+
+
+    public override void OnDestroy()
     {
 
+        base.OnDestroy();
         HostSingle.Instance.GameManager.OnPlayerConnect -= HandlePlayerConnect;
 
     }

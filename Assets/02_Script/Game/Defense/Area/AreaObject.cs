@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnAbleArea : MonoBehaviour
+public class AreaObject : MonoBehaviour
 {
 
     [SerializeField] private float width, height;
@@ -16,10 +16,17 @@ public class SpawnAbleArea : MonoBehaviour
 
     }
 
-    public bool ChackMakeAble(Rect rect)
+    public bool ChackOverlaps(Rect rect)
     {
 
         return this.rect.Overlaps(rect);
+
+    }
+
+    public bool ChackContains(Vector2 point)
+    {
+
+        return rect.Contains(point);
 
     }
 

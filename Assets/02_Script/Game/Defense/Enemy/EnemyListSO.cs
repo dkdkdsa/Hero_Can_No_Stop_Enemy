@@ -1,0 +1,21 @@
+using System.Collections;
+using System.Collections.Generic;
+using Unity.Netcode;
+using UnityEngine;
+
+[System.Serializable]
+public class EnemyListData
+{
+
+    public string key;
+    public NetworkObject netObj;
+
+}
+
+[CreateAssetMenu(menuName = "SO/Enemy/EnemyList")]
+public class EnemyListSO : ScriptableObject
+{
+    
+    public List<EnemyListData> list;
+
+}
