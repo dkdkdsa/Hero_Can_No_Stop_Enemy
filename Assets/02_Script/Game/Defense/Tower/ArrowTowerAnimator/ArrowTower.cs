@@ -5,6 +5,16 @@ using UnityEngine;
 
 public class ArrowTower : TargetRotateTower
 {
+
+    private ArrowTowerAnimator animator;
+
+    private void Awake()
+    {
+        
+        animator = GetComponent<ArrowTowerAnimator>();
+
+    }
+
     protected override void DoAttack()
     {
 
@@ -24,7 +34,7 @@ public class ArrowTower : TargetRotateTower
     private void SetAnimationClientRPC()
     {
 
-
+        animator.SetAttackAnime();
 
     }
 
