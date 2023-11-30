@@ -12,11 +12,20 @@ public class EnemyRoot : NetworkBehaviour
     private Rigidbody2D rigid;
     private float hp;
 
+    public float MoveValue { get; protected set; }
+
     private void Awake()
     {
 
         rigid = GetComponent<Rigidbody2D>();
         hp = maxHP;
+
+    }
+
+    protected virtual void Update()
+    {
+
+        MoveValue += Time.deltaTime * moveSpeed;
 
     }
 
@@ -45,6 +54,8 @@ public class EnemyRoot : NetworkBehaviour
     public void SetDirAndPosClientRPC(Vector2 ownerPos, Vector2 otherPos, ulong clientId)
     {
 
+        DefenseManager.Instance.AddEnemy(this, NetworkObject.OwnerClientId);
+
         if(NetworkManager.Singleton.LocalClientId == clientId)
         {
 
@@ -56,7 +67,6 @@ public class EnemyRoot : NetworkBehaviour
         {
 
             transform.position = ownerPos;
-            DefenseManager.Instance.AddEnemy(NetworkObject);
             SetDir(Vector2.up);
 
         }

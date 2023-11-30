@@ -23,7 +23,7 @@ public class DefenseManager : NetworkBehaviour
     [SerializeField] private Transform ownerPoint;
     [SerializeField] private Transform otherPoint;
 
-    private List<NetworkObject> enemyList = new();
+    private Dictionary<ulong, List<EnemyRoot>> clientEnemyDic = new();
 
     public List<TowerObj> towerList = new();
     public static DefenseManager Instance;
@@ -91,17 +91,26 @@ public class DefenseManager : NetworkBehaviour
 
     }
 
-    public void AddEnemy(NetworkObject netObj)
+    public void AddEnemy(EnemyRoot netObj, ulong ownerId)
     {
 
-        enemyList.Add(netObj);
+        clientEnemyDic[ownerId].Add(netObj);
 
     }
 
-    public List<NetworkObject> GetEnemys()
+    public List<EnemyRoot> GetEnemys(ulong clientId)
     {
 
-        return enemyList;
+        return clientEnemyDic[clientId];
+
+    }
+
+    public void RemoveEnemy(EnemyRoot enemy, ulong clientId)
+    {
+
+        if (IsServer) return;
+
+        clientEnemyDic[clientId].Remove(enemy);
 
     }
 
