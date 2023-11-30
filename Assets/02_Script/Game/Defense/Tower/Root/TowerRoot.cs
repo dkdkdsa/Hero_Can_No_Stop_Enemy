@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+[System.Serializable]
 public class LevelData
 {
 
@@ -51,6 +52,8 @@ public abstract class TowerRoot : NetworkBehaviour
 
         }
 
+        ChackTarget();
+
     }
 
     protected virtual void SetTarget()
@@ -66,7 +69,36 @@ public abstract class TowerRoot : NetworkBehaviour
 
             float dist = (transform.position - list[i].transform.position).sqrMagnitude;
 
-            if(dist <= Mathf.Pow(levelData[curLv].attackRange, 2) && dist < maxWalkValue)
+            if(dist <= Mathf.Pow(levelData[curLv].attackRange, 2) 
+                && list[i].MoveValue > maxWalkValue)
+            {
+
+                maxWalkValue = list[i].MoveValue;
+                idx = i;
+
+            }
+
+        }
+
+        SetTargetServerRPC(idx);
+
+    }
+
+    protected virtual void ChackTarget()
+    {
+
+        var list = DefenseManager.Instance.GetEnemys(OwnerClientId);
+
+        float maxWalkValue = float.MinValue;
+        int idx = -1;
+
+        for (int i = 0; i < list.Count; i++)
+        {
+
+            float dist = (transform.position - list[i].transform.position).sqrMagnitude;
+
+            if (dist <= Mathf.Pow(levelData[curLv].attackRange, 2)
+                && list[i].MoveValue > maxWalkValue)
             {
 
                 maxWalkValue = dist;
@@ -76,10 +108,11 @@ public abstract class TowerRoot : NetworkBehaviour
 
         }
 
-        if(idx != -1)
+        if (target != list[idx])
         {
 
-            SetTargetServerRPC(idx);
+            isSetTargetCalled = true;
+            SetTarget();
 
         }
 
@@ -132,7 +165,7 @@ public abstract class TowerRoot : NetworkBehaviour
 
     }
 
-    private IEnumerator AttackDelayCo()
+    protected IEnumerator AttackDelayCo()
     {
 
         isAttackCoolDown = true;

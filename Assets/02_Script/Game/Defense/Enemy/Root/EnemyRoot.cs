@@ -29,6 +29,14 @@ public class EnemyRoot : NetworkBehaviour
 
     }
 
+    public override void OnDestroy()
+    {
+        
+        base.OnDestroy();
+        DefenseManager.Instance.RemoveEnemy(this, OwnerClientId);
+
+    }
+
     public void SetDir(Vector2 dir)
     {
 
@@ -51,10 +59,10 @@ public class EnemyRoot : NetworkBehaviour
     }
 
     [ClientRpc]
-    public void SetDirAndPosClientRPC(Vector2 ownerPos, Vector2 otherPos, ulong clientId)
+    public void SetDirAndPosClientRPC(Vector2 ownerPos, Vector2 otherPos, ulong clientId, ulong ownerId)
     {
 
-        DefenseManager.Instance.AddEnemy(this, NetworkObject.OwnerClientId);
+        DefenseManager.Instance.AddEnemy(this, ownerId);
 
         if(NetworkManager.Singleton.LocalClientId == clientId)
         {

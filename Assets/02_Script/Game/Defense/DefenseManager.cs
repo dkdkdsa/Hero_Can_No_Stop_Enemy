@@ -87,12 +87,19 @@ public class DefenseManager : NetworkBehaviour
 
         netEnemy.SpawnWithOwnership(ownerId);
 
-        netEnemy.GetComponent<EnemyRoot>().SetDirAndPosClientRPC(ownerPoint.position, otherPoint.position, clientId);
+        netEnemy.GetComponent<EnemyRoot>().SetDirAndPosClientRPC(ownerPoint.position, otherPoint.position, clientId, ownerId);
 
     }
 
     public void AddEnemy(EnemyRoot netObj, ulong ownerId)
     {
+
+        if (!clientEnemyDic.ContainsKey(ownerId))
+        {
+
+            clientEnemyDic.Add(ownerId, new());
+
+        }
 
         clientEnemyDic[ownerId].Add(netObj);
 
@@ -101,14 +108,19 @@ public class DefenseManager : NetworkBehaviour
     public List<EnemyRoot> GetEnemys(ulong clientId)
     {
 
+        if (!clientEnemyDic.ContainsKey(clientId))
+        {
+
+            clientEnemyDic.Add(clientId, new());
+
+        }
+
         return clientEnemyDic[clientId];
 
     }
 
     public void RemoveEnemy(EnemyRoot enemy, ulong clientId)
     {
-
-        if (IsServer) return;
 
         clientEnemyDic[clientId].Remove(enemy);
 
