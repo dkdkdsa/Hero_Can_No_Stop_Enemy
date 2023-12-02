@@ -52,7 +52,7 @@ public class EnemyRoot : NetworkBehaviour
         if(hp <= 0)
         {
 
-            Destroy(gameObject);
+            DestroyObjectServerRPC();
 
         }
 

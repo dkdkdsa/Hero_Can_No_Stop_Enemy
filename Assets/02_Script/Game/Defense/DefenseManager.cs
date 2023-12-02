@@ -4,15 +4,6 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
-[System.Serializable]
-public class TowerObj
-{
-
-    public string key;
-    public NetworkObject obj;
-
-}
-
 public class DefenseManager : NetworkBehaviour
 {
 
@@ -22,10 +13,11 @@ public class DefenseManager : NetworkBehaviour
     [Header("EnemyWave")]
     [SerializeField] private Transform ownerPoint;
     [SerializeField] private Transform otherPoint;
+    [Space]
+    [SerializeField] private TowerListSO towerData;
 
     private Dictionary<ulong, List<EnemyRoot>> clientEnemyDic = new();
 
-    public List<TowerObj> towerList = new();
     public static DefenseManager Instance;
 
     private void Awake()
@@ -52,7 +44,7 @@ public class DefenseManager : NetworkBehaviour
     public void SpawnTowerServerRPC(string towerPrefab, Vector2 originPos, ulong clientId)
     {
 
-        var prefab = towerList.Find(x => x.key == towerPrefab);
+        var prefab = towerData.lists.Find(x => x.key == towerPrefab);
         var tower = Instantiate(prefab.obj);
 
         tower.SpawnWithOwnership(clientId);

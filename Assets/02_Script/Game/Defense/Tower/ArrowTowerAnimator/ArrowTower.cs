@@ -7,16 +7,31 @@ public class ArrowTower : TargetRotateTower
 {
 
     private ArrowTowerAnimator animator;
+    private LineRenderer line;
 
     private void Awake()
     {
         
         animator = GetComponent<ArrowTowerAnimator>();
+        line = GetComponentInChildren<LineRenderer>();
+
+        animator.OnAttackAnimeEnd += HandleAttackAnimeEnd;
+
+    }
+
+    public override void OnDestroy()
+    {
+
+        base.OnDestroy();
+
+        animator.OnAttackAnimeEnd -= HandleAttackAnimeEnd;
 
     }
 
     protected override void DoAttack()
     {
+
+        if (!IsOwner) return;
 
         SetAnimationServerRPC();
 
@@ -38,6 +53,29 @@ public class ArrowTower : TargetRotateTower
 
     }
 
+    private void HandleAttackAnimeEnd()
+    {
+
+        if (target == null) return;
+
+        line.enabled = true;
+        line.SetPosition(0, line.transform.position);
+        line.SetPosition(1, target.transform.position);
+
+        if (IsOwner)
+        {
+
+            target.TakeDamage(levelData[curLv].attackPower);
+            StartCoroutine(AttackDelayCo());
+
+        }
+
+        isAttackCalled = false;
+
+        StartCoroutine(LineReleseCo());
+
+    }
+
     protected override void Rotate()
     {
 
@@ -45,6 +83,14 @@ public class ArrowTower : TargetRotateTower
 
         Vector2 dir = transform.position - target.transform.position;
         transform.right = -dir.normalized;
+
+    }
+
+    private IEnumerator LineReleseCo()
+    {
+
+        yield return new WaitForSeconds(0.05f);
+        line.enabled = false;
 
     }
 

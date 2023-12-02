@@ -108,11 +108,16 @@ public abstract class TowerRoot : NetworkBehaviour
 
         }
 
-        if (target != list[idx])
+        if(idx != -1)
         {
 
-            isSetTargetCalled = true;
-            SetTarget();
+            if (target != list[idx])
+            {
+
+                isSetTargetCalled = true;
+                SetTarget();
+
+            }
 
         }
 
@@ -129,6 +134,8 @@ public abstract class TowerRoot : NetworkBehaviour
     [ClientRpc]
     private void SetTargetClientRPC(int idx)
     {
+
+        if (idx == -1) return;
 
         var list = DefenseManager.Instance.GetEnemys(OwnerClientId);
 
