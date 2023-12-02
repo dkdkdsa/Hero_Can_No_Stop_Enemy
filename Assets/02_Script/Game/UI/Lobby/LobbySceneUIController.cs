@@ -18,7 +18,21 @@ public class LobbySceneUIController : NetworkBehaviour
 
     }
 
+    private void Update()
+    {
 
+#if UNITY_EDITOR
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+
+            NetworkManager.Singleton.SceneManager.LoadScene(SceneList.GameScene, LoadSceneMode.Single);
+
+        }
+
+#endif
+
+    }
 
     public override void OnDestroy()
     {
