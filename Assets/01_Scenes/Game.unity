@@ -721,6 +721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 775730541}
   - component: {fileID: 775730542}
+  - component: {fileID: 775730543}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -759,6 +760,18 @@ MonoBehaviour:
   moveAbleArea: {fileID: 509026487}
   moveSpeed: 10
   MoveAble: 1
+--- !u!114 &775730543
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 775730540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a764338bce907e0408eea180183f61e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &947364682
 GameObject:
   m_ObjectHideFlags: 0
@@ -61397,6 +61410,53 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &1333987353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1333987354}
+  - component: {fileID: 1333987355}
+  m_Layer: 0
+  m_Name: PlayerDeckController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1333987354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333987353}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 929.26575, y: 523.1958, z: -3.5087473}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1333987355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1333987353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b433cf0a128fb1443a3cc14c17e54643, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerDeckPanel: {fileID: 947624052}
+  towerData: {fileID: 11400000, guid: f8d635181adac9e4da7ae813273ab686, type: 2}
+  slotPrefab: {fileID: 6283035778572630924, guid: 15b3ca05d247fad4488bdf7fb3cd0acf, type: 3}
 --- !u!1 &1449263361
 GameObject:
   m_ObjectHideFlags: 0
@@ -61815,3 +61875,4 @@ SceneRoots:
   - {fileID: 1163619578}
   - {fileID: 947364686}
   - {fileID: 2107493327}
+  - {fileID: 1333987354}
