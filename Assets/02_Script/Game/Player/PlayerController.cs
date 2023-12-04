@@ -18,15 +18,6 @@ public class PlayerController : MonoBehaviour
 
         Move();
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-
-            var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            DefenseManager.Instance.SpawnTowerServerRPC("Debug", pos, NetworkManager.Singleton.LocalClientId);
-
-        }
-
     }
 
     private void Move()
@@ -47,5 +38,6 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+
 
 }

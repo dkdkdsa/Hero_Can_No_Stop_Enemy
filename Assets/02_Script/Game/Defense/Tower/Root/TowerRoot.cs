@@ -26,7 +26,7 @@ public abstract class TowerRoot : NetworkBehaviour
     protected bool isAttackCoolDown;
     protected bool isAttackCalled;
 
-    public AreaObject towerArea;
+    public AreaObject towerArea { get; protected set; }
 
     protected virtual void Awake()
     {
@@ -179,6 +179,14 @@ public abstract class TowerRoot : NetworkBehaviour
 
         transform.position = cPos;
 
+
+        if(clientId == NetworkManager.Singleton.LocalClientId)
+        {
+
+            FindObjectOfType<PlayerDeckSettingController>().TowerAdd(this);
+
+        }
+
     }
 
     protected IEnumerator AttackDelayCo()
@@ -187,6 +195,22 @@ public abstract class TowerRoot : NetworkBehaviour
         isAttackCoolDown = true;
         yield return new WaitForSeconds(levelData[curLv].attackCoolDown);
         isAttackCoolDown = false;
+
+    }
+
+    public override void OnDestroy()
+    {
+
+        base.OnDestroy();
+
+        if (NetworkManager.Singleton == null) return;
+
+        if(OwnerClientId == NetworkManager.Singleton.LocalClientId)
+        {
+
+            FindObjectOfType<PlayerDeckSettingController>().TowerRemove(this);
+
+        }
 
     }
 

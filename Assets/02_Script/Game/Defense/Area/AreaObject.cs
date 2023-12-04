@@ -9,10 +9,10 @@ public class AreaObject : MonoBehaviour
 
     private Rect rect;
 
-    private void Awake()
+    private void Update()
     {
-        
-        rect = new Rect(transform.position.x - width / 2, transform.position.y - height /2, width, height);
+
+        rect = new Rect(transform.position.x - width / 2, transform.position.y - height / 2, width, height);
 
     }
 

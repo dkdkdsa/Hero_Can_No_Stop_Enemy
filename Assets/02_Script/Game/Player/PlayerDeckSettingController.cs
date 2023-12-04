@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Netcode;
 using UnityEngine;
 
 public class PlayerDeckSettingController : MonoBehaviour
@@ -10,7 +11,7 @@ public class PlayerDeckSettingController : MonoBehaviour
     [SerializeField] private AreaObject towerCreateArea;
 
     private List<TowerRoot> towers = new();
-    private Rect rect => new Rect(transform.position.x - 1 / 2, transform.position.y - 1 / 2, 1, 1);
+    private Rect rect => new Rect(towerSpawnAreaSprite.transform.position.x - 1 / 2, towerSpawnAreaSprite.transform.position.y - 1 / 2, 1, 1);
     private bool isTowerCreating;
     private bool createAble;
     private string towerKey;
@@ -23,7 +24,9 @@ public class PlayerDeckSettingController : MonoBehaviour
         ChackCreateAble();
         SetSpawnSpriteColor();
 
-        towerSpawnAreaSprite.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        towerSpawnAreaSprite.transform.position = dir;
+
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -38,6 +41,15 @@ public class PlayerDeckSettingController : MonoBehaviour
     {
 
         towerSpawnAreaSprite.gameObject.SetActive(false);
+        isTowerCreating = false;
+
+        if (!createAble) return;
+        createAble = false;
+
+        DefenseManager.Instance.SpawnTowerServerRPC(
+            towerKey,
+            towerSpawnAreaSprite.transform.position,
+            NetworkManager.Singleton.LocalClientId);
 
     }
 
@@ -60,10 +72,12 @@ public class PlayerDeckSettingController : MonoBehaviour
         foreach(var area in towers)
         {
 
+            Debug.Log(area);
+
             if (area.towerArea.ChackOverlaps(rect))
             {
 
-                vel2 =false; 
+                vel2 = false; 
                 break;
 
             }
@@ -80,6 +94,20 @@ public class PlayerDeckSettingController : MonoBehaviour
         towerSpawnAreaSprite.gameObject.SetActive(true);
         isTowerCreating = true;
         towerKey = key;
+
+    }
+
+    public void TowerAdd(TowerRoot tower)
+    {
+
+        towers.Add(tower);
+
+    }
+
+    public void TowerRemove(TowerRoot tower)
+    {
+
+        towers.Remove(tower);
 
     }
 
