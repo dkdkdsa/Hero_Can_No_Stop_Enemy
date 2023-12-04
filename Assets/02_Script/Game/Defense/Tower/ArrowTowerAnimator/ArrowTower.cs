@@ -9,9 +9,11 @@ public class ArrowTower : TargetRotateTower
     private ArrowTowerAnimator animator;
     private LineRenderer line;
 
-    private void Awake()
+    protected override void Awake()
     {
-        
+
+        base.Awake();
+
         animator = GetComponent<ArrowTowerAnimator>();
         line = GetComponentInChildren<LineRenderer>();
 

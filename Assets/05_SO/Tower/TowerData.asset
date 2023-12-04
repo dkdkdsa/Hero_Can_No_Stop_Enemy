@@ -13,5 +13,8 @@ MonoBehaviour:
   m_Name: TowerData
   m_EditorClassIdentifier: 
   lists:
-  - key: Debug
+  - key: Arrow
     obj: {fileID: 8353194025080382527, guid: d5cf2a9f3f2add946b3d8dfecb560d86, type: 3}
+    sprite: {fileID: 897027307, guid: fa1943057ca33594d933649b9b1da07a, type: 3}
+    cost: 250
+    towerName: "\uD654\uC0B4\uD0C0\uC6CC"

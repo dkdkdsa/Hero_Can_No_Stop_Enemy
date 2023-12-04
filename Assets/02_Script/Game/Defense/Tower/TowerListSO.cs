@@ -9,6 +9,9 @@ public class TowerObj
 
     public string key;
     public NetworkObject obj;
+    public Sprite sprite;
+    public int cost;
+    public string towerName;
 
 }
 

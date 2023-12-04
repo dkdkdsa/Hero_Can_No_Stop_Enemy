@@ -19,12 +19,21 @@ public abstract class TowerRoot : NetworkBehaviour
 
     [SerializeField] protected List<LevelData> levelData = new();
 
+    private bool isSetTargetCalled;
+
+    protected EnemyRoot target;
     protected int curLv;
     protected bool isAttackCoolDown;
-    protected EnemyRoot target;
-
-    private bool isSetTargetCalled;
     protected bool isAttackCalled;
+
+    public AreaObject towerArea;
+
+    protected virtual void Awake()
+    {
+
+        towerArea = GetComponent<AreaObject>();
+
+    }
 
     protected virtual void Update()
     {
