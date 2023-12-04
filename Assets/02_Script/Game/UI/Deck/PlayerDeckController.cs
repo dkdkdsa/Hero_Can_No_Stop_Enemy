@@ -11,6 +11,7 @@ public class PlayerDeckController : MonoBehaviour
     [SerializeField] private Slot slotPrefab;
 
     private PlayerDeckSettingController controller;
+    private PlayerMoney playerMoney;
 
     private void Awake()
     {
@@ -27,11 +28,14 @@ public class PlayerDeckController : MonoBehaviour
         }
 
         controller = FindObjectOfType<PlayerDeckSettingController>();
+        playerMoney = FindObjectOfType<PlayerMoney>();
 
     }
 
     private void HandleSlotClick(string key, Slot slot)
     {
+
+        if (playerMoney.GetMoney() < towerData.lists.Find(x => x.key == key).cost) return;
 
         controller.StartTowerCreate(key);
 

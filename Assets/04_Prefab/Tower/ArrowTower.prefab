@@ -156,9 +156,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelData:
-  - attackPower: 2
+  - attackPower: 5
     attackRange: 5
-    attackCoolDown: 1
+    attackCoolDown: 0.5
     levelUpCost: 100
 --- !u!114 &4376617658490849121
 MonoBehaviour:

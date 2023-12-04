@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "502033943020",
+    "firebase_url": "https://netpp-3a388-default-rtdb.firebaseio.com",
+    "project_id": "netpp-3a388",
+    "storage_bucket": "netpp-3a388.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502033943020:android:47cc4aefefe243066758c9",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.NetProject"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB64Qj7at9PbqK0bbmvxasLfME3nUR_Nj0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

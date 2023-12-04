@@ -1,18 +1,29 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerMoneyViwer : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] private TMP_Text moneyText;
+
+    private PlayerMoney playerMoney;
+
+    private void Awake()
     {
         
+        playerMoney = FindObjectOfType<PlayerMoney>();
+        playerMoney.OnMoneyChangeEvent += HandleMoneyChanged;
+
     }
 
-    // Update is called once per frame
-    void Update()
+    private void HandleMoneyChanged(int changeValue)
     {
-        
+
+        moneyText.text = $"{changeValue}$";
+
     }
+
 }

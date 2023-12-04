@@ -13,6 +13,7 @@ public class AppController : MonoBehaviour
 
     [SerializeField] private ClientSingle clientPrefab;
     [SerializeField] private HostSingle hostPrefab;
+    [SerializeField] private FirebaseManager firebaseManagerPrefab;
 
     public static AppController Instance;
 
@@ -46,7 +47,10 @@ public class AppController : MonoBehaviour
         ClientSingle client = Instantiate(clientPrefab, transform);
         client.CreateClient();
 
-        SceneManager.LoadScene(SceneList.MenuScene);
+        FirebaseManager firebaseManager = Instantiate(firebaseManagerPrefab, transform);
+        firebaseManager.StartAuth();
+
+        SceneManager.LoadScene(SceneList.LoginScene);
 
     }
 

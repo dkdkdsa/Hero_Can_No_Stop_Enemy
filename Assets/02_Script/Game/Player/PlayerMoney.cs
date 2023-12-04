@@ -2,15 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void OnMoneyValueChangeEvent(int changeValue);
+
 public class PlayerMoney : MonoBehaviour
 {
 
-    public int money { get; private set; } = 600;
+    private int money = 600;
+
+    public event OnMoneyValueChangeEvent OnMoneyChangeEvent;
+
+    private void Start()
+    {
+        
+        OnMoneyChangeEvent?.Invoke(money);
+
+    }
 
     public void AddMoney(int value)
     {
 
         money += value;
+        OnMoneyChangeEvent?.Invoke(money);
 
     }
 
@@ -18,7 +30,10 @@ public class PlayerMoney : MonoBehaviour
     {
 
         money -= value;
+        OnMoneyChangeEvent?.Invoke(money);
 
     }
+
+    public int GetMoney() { return money; }
 
 }

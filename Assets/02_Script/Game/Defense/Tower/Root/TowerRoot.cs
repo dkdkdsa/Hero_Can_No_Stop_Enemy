@@ -26,12 +26,30 @@ public abstract class TowerRoot : NetworkBehaviour
     protected bool isAttackCoolDown;
     protected bool isAttackCalled;
 
-    public AreaObject towerArea { get; protected set; }
+    public AreaObject TowerArea 
+    {
+        get 
+        { 
+            if(area == null)
+            {
+
+                area = GetComponent<AreaObject>();
+
+            }
+
+            return area;
+
+        }
+
+        set { area = value; }
+    }
+
+    private AreaObject area;
 
     protected virtual void Awake()
     {
 
-        towerArea = GetComponent<AreaObject>();
+        TowerArea = GetComponent<AreaObject>();
 
     }
 

@@ -45,7 +45,9 @@ public class LobbyUIController : MonoBehaviour
     public async void CreateLobby()
     {
 
-        var result = await AppController.Instance.StartHostAsync("", lobbyNameField.text);
+        var result = await AppController.Instance.StartHostAsync(
+            FirebaseManager.Instance.userData.userName,
+            lobbyNameField.text);
 
         if (result)
         {
@@ -59,6 +61,13 @@ public class LobbyUIController : MonoBehaviour
             Debug.LogError("로비 생성중 에러");
 
         }
+
+    }
+
+    public void Save()
+    {
+
+        FirebaseManager.Instance.SaveUserData();
 
     }
 

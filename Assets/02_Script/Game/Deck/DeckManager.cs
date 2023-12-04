@@ -7,7 +7,7 @@ public class DeckManager : MonoBehaviour
 
     public static DeckManager Instance { get; private set; }
 
-    public List<string> DeckLs { get; private set; } = new();
+    public List<string> DeckLs { get; set; } = new();
 
     private void Awake()
     {

@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 267b276847509e64aad53ede0d68a739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 10
+  <maxHP>k__BackingField: 10
   moveSpeed: 3
 --- !u!50 &6688044262610364067
 Rigidbody2D:

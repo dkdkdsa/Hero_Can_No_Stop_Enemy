@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DefenseManager : NetworkBehaviour
 {
@@ -52,6 +53,16 @@ public class DefenseManager : NetworkBehaviour
         tower.GetComponent<TowerRoot>().SetPosClientRPC(originPos, clientId);
 
     }
+
+    [ServerRpc(RequireOwnership = false)]
+    public void GameDieServerRPC(ulong dieClient)
+    {
+
+        PlayerPrefs.SetInt("DieClient", (int)dieClient);
+        NetworkManager.SceneManager.LoadScene(SceneList.ResultScene, LoadSceneMode.Single);
+
+    }
+
 
     /// <summary>
     /// Àû ¼ÒÈ¯

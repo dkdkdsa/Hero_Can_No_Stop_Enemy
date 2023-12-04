@@ -9,12 +9,20 @@ public class PlayerDeckSettingController : MonoBehaviour
     [SerializeField] private TowerListSO towerData;
     [SerializeField] private SpriteRenderer towerSpawnAreaSprite;
     [SerializeField] private AreaObject towerCreateArea;
-
-    private List<TowerRoot> towers = new();
     private Rect rect => new Rect(towerSpawnAreaSprite.transform.position.x - 1 / 2, towerSpawnAreaSprite.transform.position.y - 1 / 2, 1, 1);
+
+    private PlayerMoney playerMoney;
+    private List<TowerRoot> towers = new();
     private bool isTowerCreating;
     private bool createAble;
     private string towerKey;
+
+    private void Awake()
+    {
+        
+        playerMoney = FindObjectOfType<PlayerMoney>();
+
+    }
 
     private void Update()
     {
@@ -46,10 +54,14 @@ public class PlayerDeckSettingController : MonoBehaviour
         if (!createAble) return;
         createAble = false;
 
+        if (playerMoney.GetMoney() < towerData.lists.Find(x => x.key == towerKey).cost) return;
+
         DefenseManager.Instance.SpawnTowerServerRPC(
             towerKey,
             towerSpawnAreaSprite.transform.position,
             NetworkManager.Singleton.LocalClientId);
+
+        playerMoney.SubtractMonmy(towerData.lists.Find(x => x.key == towerKey).cost);
 
     }
 
@@ -72,9 +84,7 @@ public class PlayerDeckSettingController : MonoBehaviour
         foreach(var area in towers)
         {
 
-            Debug.Log(area);
-
-            if (area.towerArea.ChackOverlaps(rect))
+            if (area.TowerArea.ChackOverlaps(rect))
             {
 
                 vel2 = false; 

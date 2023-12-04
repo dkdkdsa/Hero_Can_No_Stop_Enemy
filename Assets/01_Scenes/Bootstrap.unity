@@ -259,7 +259,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f56d10711cac28b4099011b2a31ffd1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deckLs: []
 --- !u!1 &1661123118
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,6 +305,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clientPrefab: {fileID: 6394685237428028762, guid: b96b0e782f52be54283d8a6eae890c00, type: 3}
   hostPrefab: {fileID: 1606705759158154568, guid: 2db4cc23697615a4ebc70fdbef1217ca, type: 3}
+  firebaseManagerPrefab: {fileID: 569024889509596934, guid: 84f82bdbd9818ad4fb4db37796c4e8b3, type: 3}
 --- !u!1 &1868389977
 GameObject:
   m_ObjectHideFlags: 0

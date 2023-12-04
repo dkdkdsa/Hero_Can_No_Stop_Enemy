@@ -102,6 +102,7 @@ public class HostGameManager : IDisposable
 
         if (!string.IsNullOrEmpty(lobbyId))
         {
+
             if (HostSingle.Instance != null)
             {
                 HostSingle.Instance.StopCoroutine(nameof(HeartbeatLobby));

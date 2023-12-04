@@ -16,7 +16,9 @@ public class DeckSettingUIController : MonoBehaviour
         foreach(var tower in towerData.lists)
         {
 
-            var slot = Instantiate(slotPrefab, deckMainPanel);
+            var parent = DeckManager.Instance.DeckLs.Contains(tower.key) ? curDeckPanel : deckMainPanel;
+
+            var slot = Instantiate(slotPrefab, parent);
             slot.SetSlot(tower.sprite, tower.key, tower.towerName);
             slot.OnPointerDownEvent += HandleSlotClick;
 

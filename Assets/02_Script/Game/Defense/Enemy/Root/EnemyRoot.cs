@@ -6,7 +6,7 @@ using UnityEngine;
 public class EnemyRoot : NetworkBehaviour
 {
 
-    [SerializeField] private float maxHP;
+    [field:SerializeField] public float maxHP { get; private set; }
     [SerializeField] private float moveSpeed;
 
     private Rigidbody2D rigid;
@@ -47,9 +47,19 @@ public class EnemyRoot : NetworkBehaviour
     public void TakeDamage(float damage)
     {
 
+        if (hp <= 0) return;
+
         hp -= damage;
 
-        if(hp <= 0)
+
+        if (OwnerClientId == NetworkManager.Singleton.LocalClientId)
+        {
+
+            FindObjectOfType<PlayerMoney>().AddMoney((int)maxHP);
+
+        }
+
+        if (hp <= 0)
         {
 
             DestroyObjectServerRPC();

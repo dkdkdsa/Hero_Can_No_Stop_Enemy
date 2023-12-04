@@ -33,7 +33,7 @@ public class LobbyPanel : MonoBehaviour
 
             Lobby joiningLobby = await Lobbies.Instance.JoinLobbyByIdAsync(lobby.Id);
 
-            await AppController.Instance.StartClientAsync("", joiningLobby.Data["JoinCode"].Value);
+            await AppController.Instance.StartClientAsync(FirebaseManager.Instance.userData.userName, joiningLobby.Data["JoinCode"].Value);
 
         }
         catch(System.Exception e)
