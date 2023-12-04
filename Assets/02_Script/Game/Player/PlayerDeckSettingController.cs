@@ -9,7 +9,7 @@ public class PlayerDeckSettingController : MonoBehaviour
     [SerializeField] private SpriteRenderer towerSpawnAreaSprite;
     [SerializeField] private AreaObject towerCreateArea;
 
-    private List<TowerRoot> towers;
+    private List<TowerRoot> towers = new();
     private Rect rect => new Rect(transform.position.x - 1 / 2, transform.position.y - 1 / 2, 1, 1);
     private bool isTowerCreating;
     private bool createAble;
@@ -20,6 +20,10 @@ public class PlayerDeckSettingController : MonoBehaviour
 
         if (!isTowerCreating) return;
 
+        ChackCreateAble();
+        SetSpawnSpriteColor();
+
+        towerSpawnAreaSprite.transform.position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -33,16 +37,24 @@ public class PlayerDeckSettingController : MonoBehaviour
     private void CreateTower()
     {
 
+        towerSpawnAreaSprite.gameObject.SetActive(false);
 
+    }
+
+    private void SetSpawnSpriteColor()
+    {
+
+        var color = createAble ? Color.green : Color.red;
+        color.a = 0.45f;
+
+        towerSpawnAreaSprite.color = color;
 
     }
 
     private void ChackCreateAble()
     {
 
-
         bool vel1 = towerCreateArea.ChackOverlaps(rect);
-
         bool vel2 = true;
 
         foreach(var area in towers)
@@ -65,6 +77,7 @@ public class PlayerDeckSettingController : MonoBehaviour
     public void StartTowerCreate(string key)
     {
 
+        towerSpawnAreaSprite.gameObject.SetActive(true);
         isTowerCreating = true;
         towerKey = key;
 

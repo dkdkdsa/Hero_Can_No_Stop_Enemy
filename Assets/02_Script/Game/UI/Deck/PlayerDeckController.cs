@@ -10,6 +10,8 @@ public class PlayerDeckController : MonoBehaviour
     [SerializeField] private TowerListSO towerData;
     [SerializeField] private Slot slotPrefab;
 
+    private PlayerDeckSettingController controller;
+
     private void Awake()
     {
         
@@ -24,12 +26,14 @@ public class PlayerDeckController : MonoBehaviour
 
         }
 
+        controller = FindObjectOfType<PlayerDeckSettingController>();
+
     }
 
     private void HandleSlotClick(string key, Slot slot)
     {
 
-
+        controller.StartTowerCreate(key);
 
     }
 
