@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResultUIController : NetworkBehaviour
 {
@@ -26,6 +27,13 @@ public class ResultUIController : NetworkBehaviour
     private void SetTextClientRPC(ulong dieClient)
     {
 
+        if (IsHost)
+        {
+
+            HostSingle.Instance.GameManager.ShutdownAsync();
+
+        }
+
         if(NetworkManager.Singleton.LocalClientId == dieClient)
         {
 
@@ -38,6 +46,13 @@ public class ResultUIController : NetworkBehaviour
             resultText.text = "½Â¸®";
 
         }
+
+    }
+
+    public void GoTitle()
+    {
+
+        SceneManager.LoadScene(SceneList.MenuScene);
 
     }
 

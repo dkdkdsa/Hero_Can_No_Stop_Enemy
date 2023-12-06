@@ -5,6 +5,7 @@ using Firebase;
 using Firebase.Auth;
 using Firebase.Database;
 using System;
+using System.Threading.Tasks;
 
 public delegate void LoginEvent(bool success, FirebaseUser user);
 public delegate void CreateAccountEvent(bool success);
@@ -16,6 +17,8 @@ public class FirebaseUserData
     public string userName;
     public List<string> deck = new();
     public int coin;
+    public int loginCount;
+    public string loginTime;
 
 }
 
@@ -27,6 +30,7 @@ public class FirebaseManager : MonoBehaviour
     private DatabaseReference db;
 
     public bool IsAuthError { get; private set; }
+    public bool IsContinuousLogIn { get; private set; }
     public FirebaseUserData userData { get; private set; }
 
     public static FirebaseManager Instance;
@@ -135,13 +139,14 @@ public class FirebaseManager : MonoBehaviour
 
         if (user == null) return;
 
-        userData = new FirebaseUserData { userName = userName };
+        userData = new FirebaseUserData { userName = userName, loginTime = DateTime.Now.ToString("f"), loginCount = 1 };
+        IsContinuousLogIn = true;
 
         db.Child("users").Child(user.UserId).Child("UserData").SetValueAsync(JsonUtility.ToJson(userData));
 
     }
 
-    public async void LoadUserdata()
+    public async Task LoadUserdata()
     {
 
         if (user == null) return;
@@ -152,9 +157,43 @@ public class FirebaseManager : MonoBehaviour
         {
 
             userData = JsonUtility.FromJson<FirebaseUserData>(res.Value.ToString());
+
+            if(userData.loginTime == null)
+            {
+
+                userData.loginTime = DateTime.Now.ToString("f");
+                userData.loginCount = 1;
+
+            }
+            else
+            {
+
+                var t = DateTime.Parse(userData.loginTime);
+
+                if ((DateTime.Now - t).TotalMinutes > 1)
+                {
+
+                    IsContinuousLogIn = true;
+                    userData.loginCount++;
+
+                }
+                else if((DateTime.Now - t).TotalDays > 1)
+                {
+
+                    IsContinuousLogIn = false;
+                    userData.loginCount = 0;
+
+                }
+
+                userData.loginTime = DateTime.Now.ToString("t");
+
+            }
+
             DeckManager.Instance.DeckLs = userData.deck;
 
         }
+
+        SaveUserData();
 
     }
 
@@ -166,6 +205,18 @@ public class FirebaseManager : MonoBehaviour
         userData.deck = DeckManager.Instance.DeckLs;
 
         db.Child("users").Child(user.UserId).Child("UserData").SetValueAsync(JsonUtility.ToJson(userData));
+
+    }
+
+    private void OnDestroy()
+    {
+        
+        if(db != null && DeckManager.Instance != null)
+        {
+
+            SaveUserData();
+
+        }
 
     }
 

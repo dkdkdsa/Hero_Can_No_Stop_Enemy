@@ -43,13 +43,13 @@ public class LoginUIController : MonoBehaviour
 
     }
 
-    private void HandleLoginEnd(bool success, FirebaseUser user)
+    private async void HandleLoginEnd(bool success, FirebaseUser user)
     {
 
         if(success)
         {
 
-            FirebaseManager.Instance.LoadUserdata();
+            await FirebaseManager.Instance.LoadUserdata();
             SceneManager.LoadScene(SceneList.MenuScene);
 
         }

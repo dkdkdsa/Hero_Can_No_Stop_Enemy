@@ -58,6 +58,7 @@ public class ArrowTower : TargetRotateTower
     private void HandleAttackAnimeEnd()
     {
 
+        isAttackCalled = false;
         if (target == null) return;
 
         line.enabled = true;
@@ -71,8 +72,6 @@ public class ArrowTower : TargetRotateTower
             StartCoroutine(AttackDelayCo());
 
         }
-
-        isAttackCalled = false;
 
         StartCoroutine(LineReleseCo());
 

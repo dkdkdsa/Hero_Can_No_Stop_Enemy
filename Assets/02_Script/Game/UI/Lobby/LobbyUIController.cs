@@ -11,11 +11,13 @@ public class LobbyUIController : MonoBehaviour
     [SerializeField] private LobbyPanel lobbyPanelPrefab;
     [SerializeField] private TMP_InputField lobbyNameField;
     [SerializeField] private Transform content;
+    [SerializeField] private GameObject rewardBtn;
 
     private void Awake()
     {
 
         Refresh();
+        CheckReword();
 
     }
 
@@ -59,6 +61,18 @@ public class LobbyUIController : MonoBehaviour
         {
 
             Debug.LogError("로비 생성중 에러");
+
+        }
+
+    }
+
+    private void CheckReword()
+    {
+
+        if (FirebaseManager.Instance.IsContinuousLogIn)
+        {
+
+            rewardBtn.SetActive(true);
 
         }
 

@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using Unity.Netcode;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class EnemyRoot : NetworkBehaviour
 {
 
     [field:SerializeField] public float maxHP { get; private set; }
-    [SerializeField] private float moveSpeed;
+    [SerializeField] protected float moveSpeed;
 
-    private Rigidbody2D rigid;
-    private float hp;
+    protected Rigidbody2D rigid;
+    protected float hp;
+    protected string prefabKey;
 
     public float MoveValue { get; protected set; }
 
@@ -51,25 +55,32 @@ public class EnemyRoot : NetworkBehaviour
 
         hp -= damage;
 
-
-        if (OwnerClientId == NetworkManager.Singleton.LocalClientId)
-        {
-
-            FindObjectOfType<PlayerMoney>().AddMoney((int)maxHP);
-
-        }
-
         if (hp <= 0)
         {
 
             DestroyObjectServerRPC();
+
+            if (OwnerClientId == NetworkManager.Singleton.LocalClientId)
+            {
+
+                FindObjectOfType<PlayerMoney>()?.AddMoney((int)maxHP);
+
+
+                if (Random.value < 0.3f)
+                {
+
+                    DefenseManager.Instance.SpawnEnemyServerRPC(prefabKey, OwnerClientId);
+
+                }
+
+            }
 
         }
 
     }
 
     [ClientRpc]
-    public void SetDirAndPosClientRPC(Vector2 ownerPos, Vector2 otherPos, ulong clientId, ulong ownerId)
+    public void SetDirAndPosClientRPC(Vector2 ownerPos, Vector2 otherPos, ulong clientId, ulong ownerId, string key)
     {
 
         DefenseManager.Instance.AddEnemy(this, ownerId);
@@ -88,6 +99,8 @@ public class EnemyRoot : NetworkBehaviour
             SetDir(Vector2.up);
 
         }
+
+        prefabKey = key;
 
     }
 

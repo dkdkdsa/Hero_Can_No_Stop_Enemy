@@ -9,7 +9,10 @@ public class PlayerDeckSettingController : MonoBehaviour
     [SerializeField] private TowerListSO towerData;
     [SerializeField] private SpriteRenderer towerSpawnAreaSprite;
     [SerializeField] private AreaObject towerCreateArea;
-    private Rect rect => new Rect(towerSpawnAreaSprite.transform.position.x - 1 / 2, towerSpawnAreaSprite.transform.position.y - 1 / 2, 1, 1);
+    private Rect rect => new Rect(
+        towerSpawnAreaSprite.transform.position.x - 1.3f / 2, 
+        towerSpawnAreaSprite.transform.position.y - 1.3f / 2, 
+        1.3f, 1.3f);
 
     private PlayerMoney playerMoney;
     private List<TowerRoot> towers = new();

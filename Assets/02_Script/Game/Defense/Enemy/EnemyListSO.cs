@@ -8,6 +8,8 @@ public class EnemyListData
 {
 
     public string key;
+    public float minTime;
+    public float weight;
     public NetworkObject netObj;
 
 }

@@ -18,6 +18,7 @@ public class DefenseManager : NetworkBehaviour
     [SerializeField] private TowerListSO towerData;
 
     private Dictionary<ulong, List<EnemyRoot>> clientEnemyDic = new();
+    private float defTime;
 
     public static DefenseManager Instance;
 
@@ -40,6 +41,12 @@ public class DefenseManager : NetworkBehaviour
 
     }
 
+    private void Update()
+    {
+
+        defTime += Time.deltaTime;
+
+    }
 
     [ServerRpc(RequireOwnership = false)]
     public void SpawnTowerServerRPC(string towerPrefab, Vector2 originPos, ulong clientId)
@@ -48,7 +55,7 @@ public class DefenseManager : NetworkBehaviour
         var prefab = towerData.lists.Find(x => x.key == towerPrefab);
         var tower = Instantiate(prefab.obj);
 
-        tower.SpawnWithOwnership(clientId);
+        tower.SpawnWithOwnership(clientId, true);
 
         tower.GetComponent<TowerRoot>().SetPosClientRPC(originPos, clientId);
 
@@ -88,9 +95,12 @@ public class DefenseManager : NetworkBehaviour
 
         }
 
-        netEnemy.SpawnWithOwnership(ownerId);
+        netEnemy.SpawnWithOwnership(ownerId, true);
 
-        netEnemy.GetComponent<EnemyRoot>().SetDirAndPosClientRPC(ownerPoint.position, otherPoint.position, clientId, ownerId);
+        netEnemy.GetComponent<EnemyRoot>().SetDirAndPosClientRPC(
+            ownerPoint.position, 
+            otherPoint.position, 
+            clientId, ownerId, enemyPrefab);
 
     }
 
@@ -136,18 +146,49 @@ public class DefenseManager : NetworkBehaviour
 
         yield return new WaitForSeconds(3f);
 
+        Queue<string> spawnQ = new();
+
         while (true)
         {
 
-            foreach(var id in clients)
+            foreach(var enemy in enemyData.list)
             {
 
-                Debug.Log(id);
-                SpawnEnemyServerRPC("Debug", id);
+                if(defTime >= enemy.minTime)
+                {
+
+                    int cnt = (int)((defTime - enemy.minTime) / enemy.weight);
+
+                    cnt = Mathf.Clamp(cnt, 0, 30);
+
+                    for(int i = 0; i < cnt; i++)
+                    {
+
+                        spawnQ.Enqueue(enemy.key);
+
+                    }
+
+                }
 
             }
 
-            yield return new WaitForSeconds(1);
+            while(spawnQ.Count > 0)
+            {
+
+                var key = spawnQ.Dequeue();
+
+                foreach (var id in clients)
+                {
+
+                    SpawnEnemyServerRPC(key, id);
+
+                }
+
+                yield return new WaitForSeconds(Random.Range(0.7f, 1.5f));
+
+            }
+
+
 
         }
 

@@ -19,7 +19,7 @@ public class AreaObject : MonoBehaviour
     public bool ChackOverlaps(Rect rect)
     {
 
-        return this.rect.Overlaps(rect);
+        return this.rect.Overlaps(rect) || rect.Overlaps(this.rect);
 
     }
 
