@@ -68,7 +68,7 @@ public class ArrowTower : TargetRotateTower
         if (IsOwner)
         {
 
-            target.TakeDamage(levelData[curLv].attackPower);
+            target.TakeDamage(levelData[CurLv].attackPower);
             StartCoroutine(AttackDelayCo());
 
         }

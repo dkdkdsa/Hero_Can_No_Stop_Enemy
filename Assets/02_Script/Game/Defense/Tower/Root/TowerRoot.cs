@@ -14,18 +14,24 @@ public class LevelData
 
 }
 
+public delegate void LevelUp();
+
 [RequireComponent(typeof(AreaObject))]
 public abstract class TowerRoot : NetworkBehaviour
 {
 
     [SerializeField] protected List<LevelData> levelData = new();
+    [field:SerializeField] public string TowerKey { get; protected set; } 
 
     private bool isSetTargetCalled;
 
+    private AreaObject area;
     protected EnemyRoot target;
-    protected int curLv;
     protected bool isAttackCoolDown;
     protected bool isAttackCalled;
+
+    public event LevelUp OnLevelUpEvent;
+
 
     public AreaObject TowerArea 
     {
@@ -44,8 +50,8 @@ public abstract class TowerRoot : NetworkBehaviour
 
         set { area = value; }
     }
-
-    private AreaObject area;
+    public List<LevelData> LvDataList => levelData;
+    public int CurLv { get; protected set; }
 
     protected virtual void Awake()
     {
@@ -97,7 +103,7 @@ public abstract class TowerRoot : NetworkBehaviour
 
             float dist = (transform.position - list[i].transform.position).sqrMagnitude;
 
-            if(dist <= Mathf.Pow(levelData[curLv].attackRange, 2) 
+            if(dist <= Mathf.Pow(levelData[CurLv].attackRange, 2) 
                 && list[i].MoveValue > maxWalkValue)
             {
 
@@ -125,7 +131,7 @@ public abstract class TowerRoot : NetworkBehaviour
 
             float dist = (transform.position - list[i].transform.position).sqrMagnitude;
 
-            if (dist <= Mathf.Pow(levelData[curLv].attackRange, 2)
+            if (dist <= Mathf.Pow(levelData[CurLv].attackRange, 2)
                 && list[i].MoveValue > maxWalkValue)
             {
 
@@ -212,8 +218,21 @@ public abstract class TowerRoot : NetworkBehaviour
     {
 
         isAttackCoolDown = true;
-        yield return new WaitForSeconds(levelData[curLv].attackCoolDown);
+        yield return new WaitForSeconds(levelData[CurLv].attackCoolDown);
         isAttackCoolDown = false;
+
+    }
+
+    public void LevelUp()
+    {
+
+        if(CurLv + 1 != levelData.Count)
+        {
+
+            OnLevelUpEvent?.Invoke();
+            CurLv++;
+
+        }
 
     }
 

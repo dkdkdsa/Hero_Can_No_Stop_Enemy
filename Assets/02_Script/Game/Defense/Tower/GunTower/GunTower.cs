@@ -18,7 +18,7 @@ public class GunTower : TowerRoot
         
         base.Awake();
 
-        currentGun = Instantiate(gunByLevenl[curLv], gunPos);
+        currentGun = Instantiate(gunByLevenl[CurLv], gunPos);
         spriteRenderer = GetComponent<SpriteRenderer>();
         currentGun.transform.position = gunPos.position;
 
@@ -52,7 +52,7 @@ public class GunTower : TowerRoot
         if(target != null)
         {
 
-            FAED.TakePool<Bullet>("Bullet").Shoot(target.transform, levelData[curLv].attackPower, currentGun.shootPos.position);
+            FAED.TakePool<Bullet>("Bullet").Shoot(target.transform, levelData[CurLv].attackPower, currentGun.shootPos.position);
 
             if (IsOwner)
             {
