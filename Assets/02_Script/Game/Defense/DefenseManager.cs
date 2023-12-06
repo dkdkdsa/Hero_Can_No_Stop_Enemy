@@ -159,7 +159,7 @@ public class DefenseManager : NetworkBehaviour
 
                     int cnt = (int)((defTime - enemy.minTime) / enemy.weight);
 
-                    cnt = Mathf.Clamp(cnt, 0, 30);
+                    cnt = Mathf.Clamp(cnt, 0, 10);
 
                     for(int i = 0; i < cnt; i++)
                     {

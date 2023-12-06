@@ -14,6 +14,7 @@ public class LevelData
 
 }
 
+[RequireComponent(typeof(AreaObject))]
 public abstract class TowerRoot : NetworkBehaviour
 {
 

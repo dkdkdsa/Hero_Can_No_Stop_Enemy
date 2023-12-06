@@ -62,13 +62,10 @@ public class EnemyRoot : NetworkBehaviour
         if (hp <= 0)
         {
 
-            DestroyObjectServerRPC();
-
             if (OwnerClientId == NetworkManager.Singleton.LocalClientId)
             {
 
                 FindObjectOfType<PlayerMoney>()?.AddMoney((int)maxHP);
-
 
                 if (Random.value < 0.3f)
                 {
@@ -78,6 +75,8 @@ public class EnemyRoot : NetworkBehaviour
                 }
 
             }
+
+            DestroyObjectServerRPC();
 
         }
 

@@ -18,3 +18,8 @@ MonoBehaviour:
     sprite: {fileID: 897027307, guid: fa1943057ca33594d933649b9b1da07a, type: 3}
     cost: 250
     towerName: "\uD654\uC0B4\uD0C0\uC6CC"
+  - key: Chicken
+    obj: {fileID: 7562046593480239604, guid: 91cef03f3726ced49ba625d2717e31ab, type: 3}
+    sprite: {fileID: 970128767, guid: 695850ab4a97b114aaff37ba9d516f39, type: 3}
+    cost: 100
+    towerName: "\uCE58\uD0A8\uD0C0\uC6CC"
