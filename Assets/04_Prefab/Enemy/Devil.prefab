@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6857126872893197205}
   - component: {fileID: 1442440642733370788}
   - component: {fileID: 5518657539065677659}
+  - component: {fileID: 615351214797974971}
   m_Layer: 0
   m_Name: Devil
   m_TagString: Untagged
@@ -195,6 +196,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <maxHP>k__BackingField: 8
   moveSpeed: 3
+--- !u!114 &615351214797974971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6344108816228737500}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39785286dd5510a4281c67a6ebc8fcc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7384937464933176022
 GameObject:
   m_ObjectHideFlags: 0

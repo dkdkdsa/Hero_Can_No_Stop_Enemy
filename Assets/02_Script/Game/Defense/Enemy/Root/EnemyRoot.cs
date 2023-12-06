@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(FeedbackPlayer))]
 public class EnemyRoot : NetworkBehaviour
 {
 
@@ -13,15 +14,17 @@ public class EnemyRoot : NetworkBehaviour
     [SerializeField] protected float moveSpeed;
 
     protected Rigidbody2D rigid;
+    protected FeedbackPlayer feedbackPlayer;
     protected float hp;
     protected string prefabKey;
 
     public float MoveValue { get; protected set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
 
         rigid = GetComponent<Rigidbody2D>();
+        feedbackPlayer = GetComponent<FeedbackPlayer>();
         hp = maxHP;
 
     }
@@ -54,6 +57,7 @@ public class EnemyRoot : NetworkBehaviour
         if (hp <= 0) return;
 
         hp -= damage;
+        feedbackPlayer.PlayFeedbackServerRPC(damage);
 
         if (hp <= 0)
         {

@@ -12,5 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50a87865d090e2b41a4425fdde434ffb, type: 3}
   m_Name: PoolingSO
   m_EditorClassIdentifier: 
-  alwaysPoolingObjects: []
+  alwaysPoolingObjects:
+  - poolingKey: HitParticle
+    poolingObject: {fileID: 4253224777869148737, guid: 5bf6b0f7dd2b5ec47a672281fc361861, type: 3}
+    poolCount: 10
   scenePoolingObjects: []

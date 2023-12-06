@@ -9,8 +9,10 @@ public class FlipAndMoveEnemy : EnemyRoot
     private SpriteRenderer spriteRenderer;
     private readonly int HASH_SINE_SCALE_FREQUENCY = Shader.PropertyToID("_SineScaleFrequency");
 
-    public override void OnNetworkSpawn()
+    protected override void Awake()
     {
+
+        base.Awake();
 
         spriteRenderer = GetComponent<SpriteRenderer>();
         spriteRenderer.material.SetFloat(HASH_SINE_SCALE_FREQUENCY, moveSpeed * 2);
@@ -21,6 +23,13 @@ public class FlipAndMoveEnemy : EnemyRoot
     {
 
         base.Update();
+
+        if(spriteRenderer == null)
+        {
+
+            spriteRenderer = GetComponent<SpriteRenderer>();
+
+        }
 
         spriteRenderer.flipX = rigid.velocity.x >= 0;
 

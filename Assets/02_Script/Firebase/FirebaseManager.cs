@@ -185,7 +185,7 @@ public class FirebaseManager : MonoBehaviour
 
                 }
 
-                userData.loginTime = DateTime.Now.ToString("t");
+                userData.loginTime = DateTime.Now.ToString("f");
 
             }
 
