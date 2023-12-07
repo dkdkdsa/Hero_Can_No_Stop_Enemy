@@ -8,10 +8,12 @@ public class CommunityUIController : MonoBehaviour
 
     [SerializeField] private TMP_InputField userNameField;
 
+
     public async void Serch()
     {
 
         var users = await FirebaseManager.Instance.GetAllUser();
+
 
     }
 
