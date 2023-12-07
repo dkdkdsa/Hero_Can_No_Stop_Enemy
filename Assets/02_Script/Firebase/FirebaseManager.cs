@@ -269,6 +269,15 @@ public class FirebaseManager : MonoBehaviour
 
     }
 
+    public async Task<FirebaseFriendReqData> GetFriendReq()
+    {
+
+        var res = await db.Child("users").Child(user.UserId).Child("FriendReq").GetValueAsync();
+
+        return JsonUtility.FromJson<FirebaseFriendReqData>(res.Value.ToString());
+
+    }
+
     private void OnDestroy()
     {
         

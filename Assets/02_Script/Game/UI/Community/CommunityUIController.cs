@@ -7,9 +7,28 @@ using UnityEngine;
 public class CommunityUIController : MonoBehaviour
 {
 
+    [Header("Data")]
     [SerializeField] private TMP_InputField userNameField;
     [SerializeField] private AddFriendPanel friendPreafab;
 
+    [Header("Parent")]
+    [SerializeField] private Transform addFirendParent;
+    [SerializeField] private Transform acceptFirendParent;
+    [SerializeField] private Transform friendParend;
+
+    private void Start()
+    {
+
+        StartCoroutine(FriendReqRefreshCo());
+
+    }
+
+    private void RefreshFriendAccept()
+    {
+
+
+
+    }
 
     public async void Serch()
     {
@@ -35,11 +54,23 @@ public class CommunityUIController : MonoBehaviour
         }
 
     }
-
     private void HandleFriendReq(string userKey, FirebaseUserData userData)
     {
 
         FirebaseManager.Instance.SendFriendReq(userKey);
+
+    }
+
+    public IEnumerator FriendReqRefreshCo()
+    {
+
+        while (true)
+        {
+
+            yield return new WaitForSeconds(10f);
+            RefreshFriendAccept();
+
+        }
 
     }
 
