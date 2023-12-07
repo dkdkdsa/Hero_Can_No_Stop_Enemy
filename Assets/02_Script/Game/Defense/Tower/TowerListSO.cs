@@ -12,6 +12,7 @@ public class TowerObj
     public Sprite sprite;
     public int cost;
     public string towerName;
+    public int price;
 
 }
 

@@ -17,6 +17,7 @@ public class FirebaseUserData
 
     public string userName;
     public List<string> deck = new();
+    public List<string> ableTower = new();
     public int coin;
     public int loginCount;
     public string loginTime;

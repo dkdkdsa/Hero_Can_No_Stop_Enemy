@@ -12,17 +12,8 @@ public class DeckSettingUIController : MonoBehaviour
 
     private void Awake()
     {
-        
-        foreach(var tower in towerData.lists)
-        {
 
-            var parent = DeckManager.Instance.DeckLs.Contains(tower.key) ? curDeckPanel : deckMainPanel;
-
-            var slot = Instantiate(slotPrefab, parent);
-            slot.SetSlot(tower.sprite, tower.key, tower.towerName);
-            slot.OnPointerDownEvent += HandleSlotClick;
-
-        }
+        Refresh();
 
     }
 
@@ -42,6 +33,42 @@ public class DeckSettingUIController : MonoBehaviour
 
             DeckManager.Instance.DeckLs.Add(towerKey);
             slot.transform.SetParent(curDeckPanel);
+
+        }
+
+    }
+
+    public void Refresh()
+    {
+
+        var curslot = curDeckPanel.GetComponentsInChildren<Slot>();
+        var deckslot = deckMainPanel.GetComponentsInChildren<Slot>();
+
+        foreach(var item in curslot)
+        {
+
+            Destroy(item.gameObject);
+
+        }
+
+
+        foreach (var item in deckslot)
+        {
+
+            Destroy(item.gameObject);
+
+        }
+
+        foreach (var tower in towerData.lists)
+        {
+
+            if (!DeckManager.Instance.AbleTowerLs.Contains(tower.key)) continue;
+
+            var parent = DeckManager.Instance.DeckLs.Contains(tower.key) ? curDeckPanel : deckMainPanel;
+
+            var slot = Instantiate(slotPrefab, parent);
+            slot.SetSlot(tower.sprite, tower.key, tower.towerName);
+            slot.OnPointerDownEvent += HandleSlotClick;
 
         }
 
