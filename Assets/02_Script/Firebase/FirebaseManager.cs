@@ -138,7 +138,6 @@ public class FirebaseManager : MonoBehaviour
     public void CreateUserData(string userName)
     {
 
-
         if (user == null) return;
 
         userData = new FirebaseUserData 
