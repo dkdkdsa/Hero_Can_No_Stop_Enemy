@@ -83,6 +83,8 @@ public class ShopUIController : MonoBehaviour
                 FirebaseManager.Instance.userData.coin -= tower.price;
                 DeckManager.Instance.AbleTowerLs.Add(tower.key);
                 controller.Refresh();
+                Refresh();
+                RelesePanel();
 
             }
             else
