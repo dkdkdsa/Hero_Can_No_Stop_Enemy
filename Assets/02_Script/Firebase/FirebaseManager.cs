@@ -222,17 +222,22 @@ public class FirebaseManager : MonoBehaviour
 
     }
 
-    public async Task<List<FirebaseUserData>> GetAllUser()
+    public async Task<List<(string key, FirebaseUserData userData)>> GetAllUser()
     {
 
-        List<FirebaseUserData> dataLs = new List<FirebaseUserData>();
+        List<(string key, FirebaseUserData userData)> dataLs = new();
 
         var res = await db.Child("users").GetValueAsync();
         
         foreach(var keys in res.Children) 
         {
 
-            dataLs.Add(JsonUtility.FromJson<FirebaseUserData>(keys.Child("UserData").Value.ToString()));
+            dataLs
+                .Add(
+                    (keys.Key.ToString(), 
+                    JsonUtility.FromJson<FirebaseUserData>
+                    (keys.Child("UserData").Value.ToString())
+                    ));
 
         }
 
