@@ -1,15 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class ShopUIController : MonoBehaviour
 {
 
+    [Header("Data")]
     [SerializeField] private TowerListSO towerData;
     [SerializeField] private Transform shopSlotParent;
     [SerializeField] private Slot slotPrefab;
 
+    [Header("BuyPanel")]
+    [SerializeField] private GameObject panelObject;
+    [SerializeField] private TMP_Text buyPanelText;
+
     private DeckSettingUIController controller;
+    private string currentAbleTowerKey;
 
     private void Awake()
     {
@@ -32,13 +39,35 @@ public class ShopUIController : MonoBehaviour
 
     private void HandleSlotClick(string towerKey, Slot slot)
     {
+  
+        currentAbleTowerKey = towerKey;
 
-        var tower = towerData.lists.Find(x => x.key == towerKey);
+    }
+
+    public void SetPanel(string text)
+    {
+
+        panelObject.SetActive(true);
+        buyPanelText.text = text;
+
+    }
+
+    public void RelesePanel()
+    {
+
+        panelObject.SetActive(false);
+
+    }
+
+    public void BuyTower()
+    {
+
+        var tower = towerData.lists.Find(x => x.key == currentAbleTowerKey);
 
         if (tower != null)
         {
 
-            if(FirebaseManager.Instance.userData.coin >= tower.price)
+            if (FirebaseManager.Instance.userData.coin >= tower.price)
             {
 
                 FirebaseManager.Instance.userData.coin -= tower.price;
@@ -47,10 +76,8 @@ public class ShopUIController : MonoBehaviour
 
             }
 
-        }    
+        }
 
     }
-
-
 
 }
