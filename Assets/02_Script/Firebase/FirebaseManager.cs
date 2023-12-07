@@ -31,9 +31,9 @@ public class FirebaseManager : MonoBehaviour
     private FirebaseUser user;
     private DatabaseReference db;
 
-    public bool IsAuthError { get; private set; }
-    public bool IsContinuousLogIn { get; private set; }
     public FirebaseUserData userData { get; private set; }
+    public bool IsContinuousLogIn { get; private set; }
+    public bool IsAuthError { get; private set; }
 
     public static FirebaseManager Instance;
 
@@ -219,6 +219,24 @@ public class FirebaseManager : MonoBehaviour
         userData.deck = DeckManager.Instance.DeckLs;
 
         db.Child("users").Child(user.UserId).Child("UserData").SetValueAsync(JsonUtility.ToJson(userData));
+
+    }
+
+    public async Task<List<FirebaseUserData>> GetAllUser()
+    {
+
+        List<FirebaseUserData> dataLs = new List<FirebaseUserData>();
+
+        var res = await db.Child("users").GetValueAsync();
+        
+        foreach(var keys in res.Children) 
+        {
+
+            dataLs.Add(JsonUtility.FromJson<FirebaseUserData>(keys.Child("UserData").Value.ToString()));
+
+        }
+
+        return dataLs;
 
     }
 
