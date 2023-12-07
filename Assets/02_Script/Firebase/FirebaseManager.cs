@@ -6,6 +6,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using System;
 using System.Threading.Tasks;
+using System.Linq;
 
 public delegate void LoginEvent(bool success, FirebaseUser user);
 public delegate void CreateAccountEvent(bool success);

@@ -17,12 +17,50 @@ public class UpgradeUIController : MonoBehaviour
     [SerializeField] private TowerListSO towerData;
 
     private TowerRoot tower;
+    private PlayerMoney money;
+
+    private void Awake()
+    {
+
+        money = FindObjectOfType<PlayerMoney>();
+
+    }
 
     public void SetPanel(TowerRoot tower)
     {
 
         this.tower = tower;
         InitData();
+
+    }
+
+    public void SellingTower()
+    {
+
+        tower.DestroyTowerServerRPC();
+        ReleasePanel();
+
+    }
+
+    public void ReleasePanel()
+    {
+
+        tower = null;
+        gameObject.SetActive(false);
+
+    }
+
+    public void LevelUpTower()
+    {
+
+        if(money.GetMoney() >= tower.LvDataList[tower.CurLv].levelUpCost)
+        {
+
+            money.SubtractMonmy(tower.LvDataList[tower.CurLv].levelUpCost);
+            tower.LevelUp();
+            InitData();
+
+        }
 
     }
 
@@ -34,13 +72,13 @@ public class UpgradeUIController : MonoBehaviour
         towerText.text = data.towerName;
         towerLevelText.text = $"LV : {tower.CurLv + 1}";
 
-        var str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv].attackPower.ToString("#.##");
+        var str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackPower.ToString("#.##");
         attackText.text = $"{tower.LvDataList[tower.CurLv].attackPower} -> {str}";
 
-        str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv].attackRange.ToString("#.##");
+        str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackRange.ToString("#.##");
         rangeText.text = $"{tower.LvDataList[tower.CurLv].attackRange} -> {str}";
 
-        str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv].attackCoolDown.ToString("#.##");
+        str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackCoolDown.ToString("#.##");
         coolDownText.text = $"{tower.LvDataList[tower.CurLv].attackCoolDown} -> {str}";
 
     }

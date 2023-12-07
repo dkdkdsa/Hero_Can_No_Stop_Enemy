@@ -252,4 +252,12 @@ public abstract class TowerRoot : NetworkBehaviour
 
     }
 
+    [ServerRpc]
+    public void DestroyTowerServerRPC()
+    {
+
+        Destroy(gameObject);
+
+    }
+
 }
