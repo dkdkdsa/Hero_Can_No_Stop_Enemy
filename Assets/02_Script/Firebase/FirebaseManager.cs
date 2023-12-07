@@ -154,6 +154,8 @@ public class FirebaseManager : MonoBehaviour
 
         IsContinuousLogIn = true;
 
+        DeckManager.Instance.AbleTowerLs = userData.ableTower;
+
         db.Child("users").Child(user.UserId).Child("UserData").SetValueAsync(JsonUtility.ToJson(userData));
 
     }
@@ -202,6 +204,7 @@ public class FirebaseManager : MonoBehaviour
             }
 
             DeckManager.Instance.DeckLs = userData.deck;
+            DeckManager.Instance.AbleTowerLs = userData.ableTower;
 
         }
 

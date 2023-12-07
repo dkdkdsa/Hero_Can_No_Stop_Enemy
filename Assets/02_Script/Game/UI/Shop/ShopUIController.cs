@@ -14,6 +14,7 @@ public class ShopUIController : MonoBehaviour
     [Header("BuyPanel")]
     [SerializeField] private GameObject panelObject;
     [SerializeField] private TMP_Text buyPanelText;
+    [SerializeField] private TMP_Text coinText;
 
     private DeckSettingUIController controller;
     private string currentAbleTowerKey;
@@ -35,16 +36,37 @@ public class ShopUIController : MonoBehaviour
 
         }
 
+        controller = FindObjectOfType<DeckSettingUIController>();
+
+    }
+
+    private void Update()
+    {
+
+        coinText.text = $"코인 {FirebaseManager.Instance.userData.coin}";
+
     }
 
     private void HandleSlotClick(string towerKey, Slot slot)
     {
   
         currentAbleTowerKey = towerKey;
+        UpdatePanel();
 
     }
 
-    public void SetPanel(string text)
+    private void UpdatePanel()
+    {
+
+        var tower = towerData.lists.Find(x => x.key == currentAbleTowerKey);
+
+        if (tower == null) return;
+
+        SetPanel($"{tower.towerName}을/를 {tower.price}$에 구매하시겠습니까?");
+
+    }
+
+    private void SetPanel(string text)
     {
 
         panelObject.SetActive(true);
@@ -52,7 +74,7 @@ public class ShopUIController : MonoBehaviour
 
     }
 
-    public void RelesePanel()
+    private void RelesePanel()
     {
 
         panelObject.SetActive(false);
@@ -75,8 +97,21 @@ public class ShopUIController : MonoBehaviour
                 controller.Refresh();
 
             }
+            else
+            {
+
+                SetPanel("코인이 부족합니다!");
+
+            }
 
         }
+
+    }
+
+    public void BuyCancel()
+    {
+
+        RelesePanel();
 
     }
 
