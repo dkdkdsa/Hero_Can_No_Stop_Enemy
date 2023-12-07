@@ -21,22 +21,10 @@ public class ShopUIController : MonoBehaviour
 
     private void Awake()
     {
-        
-        foreach(var item in towerData.lists)
-        {
-
-            if (!DeckManager.Instance.AbleTowerLs.Contains(item.key))
-            {
-
-                var slot = Instantiate(slotPrefab, shopSlotParent);
-                slot.SetSlot(item.sprite, item.key, item.price.ToString());
-                slot.OnPointerDownEvent += HandleSlotClick;
-
-            }
-
-        }
 
         controller = FindObjectOfType<DeckSettingUIController>();
+
+        Refresh();
 
     }
 
@@ -112,6 +100,34 @@ public class ShopUIController : MonoBehaviour
     {
 
         RelesePanel();
+
+    }
+
+    public void Refresh()
+    {
+
+        var slots = shopSlotParent.GetComponentsInChildren<Slot>();
+
+        foreach(var slot in slots)
+        {
+
+            Destroy(slot.gameObject);
+
+        }
+
+        foreach (var item in towerData.lists)
+        {
+
+            if (!DeckManager.Instance.AbleTowerLs.Contains(item.key))
+            {
+
+                var slot = Instantiate(slotPrefab, shopSlotParent);
+                slot.SetSlot(item.sprite, item.key, item.price.ToString());
+                slot.OnPointerDownEvent += HandleSlotClick;
+
+            }
+
+        }
 
     }
 
