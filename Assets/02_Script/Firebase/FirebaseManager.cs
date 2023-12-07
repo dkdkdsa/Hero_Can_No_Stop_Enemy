@@ -141,7 +141,17 @@ public class FirebaseManager : MonoBehaviour
 
         if (user == null) return;
 
-        userData = new FirebaseUserData { userName = userName, loginTime = DateTime.Now.ToString("f"), loginCount = 1 };
+        userData = new FirebaseUserData 
+        { 
+
+            userName = userName, 
+            loginTime = DateTime.Now.ToString("f"), 
+            loginCount = 1, 
+            ableTower = { "Chicken" }, 
+            coin = 500 
+
+        };
+
         IsContinuousLogIn = true;
 
         db.Child("users").Child(user.UserId).Child("UserData").SetValueAsync(JsonUtility.ToJson(userData));
