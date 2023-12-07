@@ -7,13 +7,19 @@ public class CommunityUIController : MonoBehaviour
 {
 
     [SerializeField] private TMP_InputField userNameField;
-
+    [SerializeField] private AddFriendPanel friendPreafab;
 
     public async void Serch()
     {
 
         var users = await FirebaseManager.Instance.GetAllUser();
 
+        foreach (var user in users)
+        {
+
+
+
+        }
 
     }
 
