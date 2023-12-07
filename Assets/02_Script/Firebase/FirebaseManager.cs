@@ -24,6 +24,14 @@ public class FirebaseUserData
 
 }
 
+[Serializable]
+public class FirebaseFriendReqData
+{
+
+    public List<string> reqs = new();
+
+}
+
 public class FirebaseManager : MonoBehaviour
 {
 
@@ -156,6 +164,7 @@ public class FirebaseManager : MonoBehaviour
         DeckManager.Instance.AbleTowerLs = userData.ableTower;
 
         db.Child("users").Child(user.UserId).Child("UserData").SetValueAsync(JsonUtility.ToJson(userData));
+        db.Child("users").Child(user.UserId).Child("FriendReq").SetValueAsync(JsonUtility.ToJson(new FirebaseFriendReqData()));
 
     }
 
@@ -242,6 +251,21 @@ public class FirebaseManager : MonoBehaviour
         }
 
         return dataLs;
+
+    }
+
+    public async void SendFriendReq(string postUserKey)
+    {
+
+        var res = await db.Child("users").Child(postUserKey).Child("FriendReq").GetValueAsync();
+        var data = JsonUtility.FromJson<FirebaseFriendReqData>(res.Value.ToString());
+
+        if(data != null)
+        {
+
+            data.reqs.Add(user.UserId);
+
+        }
 
     }
 

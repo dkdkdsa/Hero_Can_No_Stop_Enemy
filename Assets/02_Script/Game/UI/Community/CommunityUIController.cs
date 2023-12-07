@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -27,10 +28,18 @@ public class CommunityUIController : MonoBehaviour
 
                 slot.SetPanel(user.userData.userName, true);
                 slot.SetUserDataAndKey(user.key, user.userData);
+                slot.OnButtonClick += HandleFriendReq;
 
             }
 
         }
+
+    }
+
+    private void HandleFriendReq(string userKey, FirebaseUserData userData)
+    {
+
+        FirebaseManager.Instance.SendFriendReq(userKey);
 
     }
 
