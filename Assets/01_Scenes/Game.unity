@@ -5512,7 +5512,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 693418003}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1302963123}
+        m_TargetAssemblyTypeName: UpgradeUIController, Assembly-CSharp
+        m_MethodName: ReleasePanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &693418003
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6432,7 +6444,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1063118129}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1302963123}
+        m_TargetAssemblyTypeName: UpgradeUIController, Assembly-CSharp
+        m_MethodName: SellingTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1063118129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15942,6 +15966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1302963122}
+  - component: {fileID: 1302963123}
   m_Layer: 5
   m_Name: UpgradeUI
   m_TagString: Untagged
@@ -15969,6 +15994,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1302963123
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1302963121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04f47e9ee4ed50e46b7b46880bdddaa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerIcon: {fileID: 230778897}
+  towerText: {fileID: 1366068566}
+  towerLevelText: {fileID: 1739669237}
+  attackText: {fileID: 629278029}
+  coolDownText: {fileID: 68714701}
+  rangeText: {fileID: 1430991215}
+  upgradeText: {fileID: 784358559}
+  towerData: {fileID: 11400000, guid: f8d635181adac9e4da7ae813273ab686, type: 2}
 --- !u!1 &1333987353
 GameObject:
   m_ObjectHideFlags: 0
@@ -17262,7 +17307,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1914117735}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1302963123}
+        m_TargetAssemblyTypeName: UpgradeUIController, Assembly-CSharp
+        m_MethodName: LevelUpTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1914117735
 MonoBehaviour:
   m_ObjectHideFlags: 0

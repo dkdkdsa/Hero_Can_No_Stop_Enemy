@@ -19,10 +19,14 @@ public class UpgradeUIController : MonoBehaviour
     private TowerRoot tower;
     private PlayerMoney money;
 
+    public static UpgradeUIController Instance;
+
     private void Awake()
     {
 
         money = FindObjectOfType<PlayerMoney>();
+        Instance = this;
+        gameObject.SetActive(false);
 
     }
 
@@ -80,6 +84,9 @@ public class UpgradeUIController : MonoBehaviour
 
         str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackCoolDown.ToString("#.##");
         coolDownText.text = $"{tower.LvDataList[tower.CurLv].attackCoolDown} -> {str}";
+
+        str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv].levelUpCost.ToString() + "$";
+        upgradeText.text = $"°­È­ {str}";
 
     }
 

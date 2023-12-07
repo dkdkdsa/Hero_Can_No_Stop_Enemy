@@ -260,4 +260,12 @@ public abstract class TowerRoot : NetworkBehaviour
 
     }
 
+    private void OnMouseDown()
+    {
+        
+        UpgradeUIController.Instance.gameObject.SetActive(true);
+        UpgradeUIController.Instance.SetPanel(this);
+
+    }
+
 }

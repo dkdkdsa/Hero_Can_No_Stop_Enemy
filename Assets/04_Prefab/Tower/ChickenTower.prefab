@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 7832528523096487844}
   - component: {fileID: 4107733190673670119}
   - component: {fileID: -8643224712468918921}
+  - component: {fileID: 3093051966052419770}
   m_Layer: 0
   m_Name: ChickenTower
   m_TagString: Untagged
@@ -207,11 +208,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelData:
-  - attackPower: 1
+  - attackPower: 2
     attackRange: 5
     attackCoolDown: 1
     levelUpCost: 100
+  - attackPower: 2
+    attackRange: 5
+    attackCoolDown: 0.9
+    levelUpCost: 300
+  - attackPower: 5
+    attackRange: 5
+    attackCoolDown: 0.7
+    levelUpCost: 0
+  <TowerKey>k__BackingField: Chicken
   gunByLevenl:
+  - {fileID: 8632169735750980907, guid: 5390ccddf0a19144abfd10c6ad09d255, type: 3}
+  - {fileID: 8632169735750980907, guid: 5390ccddf0a19144abfd10c6ad09d255, type: 3}
   - {fileID: 8632169735750980907, guid: 5390ccddf0a19144abfd10c6ad09d255, type: 3}
   gunPos: {fileID: 1984091063269459737}
 --- !u!95 &4107733190673670119
@@ -249,6 +261,51 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   width: 1
   height: 1
+--- !u!61 &3093051966052419770
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5232989689690612829}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0.008407742}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.3}
+    oldSize: {x: 1.5, y: 1.5}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9949744, y: 1.0009866}
+  m_EdgeRadius: 0
 --- !u!1 &7487260869345019159
 GameObject:
   m_ObjectHideFlags: 0
