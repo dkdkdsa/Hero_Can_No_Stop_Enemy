@@ -223,14 +223,30 @@ public abstract class TowerRoot : NetworkBehaviour
 
     }
 
-    public void LevelUp()
+    [ServerRpc]
+    public void LevelUpServerRPC()
+    {
+
+        LevelUpClientRPC();
+
+    }
+
+    [ClientRpc]
+    private void LevelUpClientRPC()
+    {
+
+        LevelUp();
+
+    }
+
+    private void LevelUp()
     {
 
         if(CurLv + 1 != levelData.Count)
         {
 
-            OnLevelUpEvent?.Invoke();
             CurLv++;
+            OnLevelUpEvent?.Invoke();
 
         }
 
@@ -262,9 +278,14 @@ public abstract class TowerRoot : NetworkBehaviour
 
     private void OnMouseDown()
     {
-        
-        UpgradeUIController.Instance.gameObject.SetActive(true);
-        UpgradeUIController.Instance.SetPanel(this);
+
+        if (IsOwner)
+        {
+
+            UpgradeUIController.Instance.gameObject.SetActive(true);
+            UpgradeUIController.Instance.SetPanel(this);
+
+        }
 
     }
 

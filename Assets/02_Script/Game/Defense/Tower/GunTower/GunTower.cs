@@ -1,13 +1,15 @@
 using FD.Dev;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class GunTower : TowerRoot
 {
 
-    [SerializeField] private List<Gun> gunByLevenl;
+    [SerializeField] private List<Gun> gunByLevel;
     [SerializeField] private Transform gunPos;
 
     private SpriteRenderer spriteRenderer;
@@ -18,8 +20,18 @@ public class GunTower : TowerRoot
         
         base.Awake();
 
-        currentGun = Instantiate(gunByLevenl[CurLv], gunPos);
+        currentGun = Instantiate(gunByLevel[CurLv], gunPos);
         spriteRenderer = GetComponent<SpriteRenderer>();
+        currentGun.transform.position = gunPos.position;
+        OnLevelUpEvent += HandleLevelUp;
+
+    }
+
+    private void HandleLevelUp()
+    {
+
+        Destroy(currentGun.gameObject);
+        currentGun = Instantiate(gunByLevel[CurLv], gunPos);
         currentGun.transform.position = gunPos.position;
 
     }

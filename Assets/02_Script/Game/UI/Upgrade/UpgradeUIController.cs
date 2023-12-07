@@ -61,7 +61,7 @@ public class UpgradeUIController : MonoBehaviour
         {
 
             money.SubtractMonmy(tower.LvDataList[tower.CurLv].levelUpCost);
-            tower.LevelUp();
+            tower.LevelUpServerRPC();
             InitData();
 
         }

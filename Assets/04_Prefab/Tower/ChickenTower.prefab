@@ -221,10 +221,10 @@ MonoBehaviour:
     attackCoolDown: 0.7
     levelUpCost: 0
   <TowerKey>k__BackingField: Chicken
-  gunByLevenl:
+  gunByLevel:
   - {fileID: 8632169735750980907, guid: 5390ccddf0a19144abfd10c6ad09d255, type: 3}
-  - {fileID: 8632169735750980907, guid: 5390ccddf0a19144abfd10c6ad09d255, type: 3}
-  - {fileID: 8632169735750980907, guid: 5390ccddf0a19144abfd10c6ad09d255, type: 3}
+  - {fileID: 4377011336511039750, guid: 0165eaa6546a7e244845ff52796352d9, type: 3}
+  - {fileID: 4115576391023666306, guid: 65a433d8e45c4dc48888672de01af531, type: 3}
   gunPos: {fileID: 1984091063269459737}
 --- !u!95 &4107733190673670119
 Animator:
