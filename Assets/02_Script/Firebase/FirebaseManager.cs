@@ -315,6 +315,17 @@ public class FirebaseManager : MonoBehaviour
 
     }
 
+    public async Task AddFriend(string addTo, FirebaseFriend friend)
+    {
+
+        var res = await GetFriendData(addTo);
+
+        res.friends.Add(friend);
+
+        await db.Child("users").Child(addTo).Child("Friends").SetValueAsync(JsonUtility.ToJson(friend));
+
+    }
+
     private void OnDestroy()
     {
         

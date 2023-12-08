@@ -14,12 +14,14 @@ public class CommunityUIController : MonoBehaviour
     [Header("Parent")]
     [SerializeField] private Transform addFirendParent;
     [SerializeField] private Transform acceptFirendParent;
-    [SerializeField] private Transform friendParend;
+    [SerializeField] private Transform friendParent;
 
     private void Start()
     {
 
-        StartCoroutine(FriendReqRefreshCo());
+        RefreshFriendAccept();
+        RefreshFriend();
+        StartCoroutine(RefreshCo());
 
     }
 
@@ -30,6 +32,14 @@ public class CommunityUIController : MonoBehaviour
         var allUser = await FirebaseManager.Instance.GetAllUser();
         var friends = await FirebaseManager.Instance.GetFriendData(FirebaseManager.Instance.CurrentUserId);
 
+        var slots = acceptFirendParent.GetComponentsInChildren<Slot>();
+
+        foreach(var slot in slots)
+        {
+
+            Destroy(slot.gameObject);
+
+        }
 
         foreach (var item in friendReq.reqs)
         {
@@ -42,6 +52,7 @@ public class CommunityUIController : MonoBehaviour
                 var slot = Instantiate(friendPreafab, acceptFirendParent);
                 slot.SetPanel(user.userData.userName, true);
                 slot.SetUserDataAndKey(item, user.userData);
+                slot.OnButtonClick += HandleFriendAccept;
 
             } 
 
@@ -49,13 +60,48 @@ public class CommunityUIController : MonoBehaviour
         }
 
     }
+    private async void RefreshFriend()
+    {
+
+        var friends = await FirebaseManager.Instance.GetFriendData(FirebaseManager.Instance.CurrentUserId);
+
+        var slots = friendParent.GetComponentsInChildren<Slot>();
+
+        foreach (var slot in slots)
+        {
+
+            Destroy(slot.gameObject);
+
+        }
+
+        foreach(var friend in friends.friends)
+        {
+
+            var slot = Instantiate(friendPreafab, friendParent);
+            slot.SetPanel(friend.userName, false);
+
+        }
+
+
+    }
 
     public async void Serch()
     {
 
+        var slots = addFirendParent.GetComponentsInChildren<Slot>();
+
+        foreach (var slot in slots)
+        {
+
+            Destroy(slot.gameObject);
+
+        }
+
         var users = await FirebaseManager.Instance.GetAllUser();
 
-        var findUser = users.FindAll(x => x.userData.userName.Contains(userNameField.text));
+        var findUser = users.FindAll(
+            x => x.userData.userName.Contains(userNameField.text) 
+        && x.key != FirebaseManager.Instance.CurrentUserId);
 
         if(findUser.Count != 0)
         {
@@ -81,7 +127,29 @@ public class CommunityUIController : MonoBehaviour
 
     }
 
-    public IEnumerator FriendReqRefreshCo()
+    private async void HandleFriendAccept(string userKey, FirebaseUserData userData)
+    {
+
+         await FirebaseManager.Instance.AddFriend(userKey,
+            new FirebaseFriend
+            {
+
+                userId = FirebaseManager.Instance.CurrentUserId,
+                userName = FirebaseManager.Instance.userData.userName,
+
+            });
+
+        await FirebaseManager.Instance.AddFriend(FirebaseManager.Instance.CurrentUserId, new FirebaseFriend
+        {
+
+            userId = userKey,
+            userName = userData.userName,
+
+        });
+
+    }
+
+    public IEnumerator RefreshCo()
     {
 
         while (true)
@@ -89,6 +157,7 @@ public class CommunityUIController : MonoBehaviour
 
             yield return new WaitForSeconds(10f);
             RefreshFriendAccept();
+            RefreshFriend();
 
         }
 
