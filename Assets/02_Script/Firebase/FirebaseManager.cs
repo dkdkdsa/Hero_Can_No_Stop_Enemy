@@ -18,7 +18,6 @@ public class FirebaseUserData
     public string userName;
     public List<string> deck = new();
     public List<string> ableTower = new();
-    public List<string> friends = new();
     public int coin;
     public int loginCount;
     public string loginTime;
@@ -32,6 +31,23 @@ public class FirebaseFriendReqData
     public List<string> reqs = new();
 
 }
+[SerializeField]
+public class FirebaseFriend
+{
+
+    public string userName;
+    public string userId;
+
+}
+
+[Serializable]
+public class FirebaseFriendData
+{
+
+    public List<FirebaseFriend> friends = new();
+
+}
+
 
 public class FirebaseManager : MonoBehaviour
 {
@@ -45,6 +61,7 @@ public class FirebaseManager : MonoBehaviour
     public bool IsAuthError { get; private set; }
 
     public static FirebaseManager Instance;
+    public string CurrentUserId => user.UserId;
 
     public void StartAuth()
     {
@@ -75,6 +92,7 @@ public class FirebaseManager : MonoBehaviour
 
     public async void Login(string email, string password, LoginEvent loginEvent)
     {
+
 
         try
         {
@@ -166,6 +184,7 @@ public class FirebaseManager : MonoBehaviour
 
         db.Child("users").Child(user.UserId).Child("UserData").SetValueAsync(JsonUtility.ToJson(userData));
         db.Child("users").Child(user.UserId).Child("FriendReq").SetValueAsync(JsonUtility.ToJson(new FirebaseFriendReqData()));
+        db.Child("users").Child(user.UserId).Child("Friends").SetValueAsync(JsonUtility.ToJson(new FirebaseFriendData()));
 
     }
 
@@ -227,6 +246,7 @@ public class FirebaseManager : MonoBehaviour
         if (user == null) return;
 
         userData.deck = DeckManager.Instance.DeckLs;
+        userData.ableTower = DeckManager.Instance.AbleTowerLs;
 
         db.Child("users").Child(user.UserId).Child("UserData").SetValueAsync(JsonUtility.ToJson(userData));
 
@@ -276,6 +296,22 @@ public class FirebaseManager : MonoBehaviour
         var res = await db.Child("users").Child(user.UserId).Child("FriendReq").GetValueAsync();
 
         return JsonUtility.FromJson<FirebaseFriendReqData>(res.Value.ToString());
+
+    }
+
+    public async Task<FirebaseFriendData> GetFriendData(string userId)
+    {
+
+        var res = await db.Child("users").Child(userId).Child("Friends").GetValueAsync();
+
+        if(res != null)
+        {
+
+            return JsonUtility.FromJson<FirebaseFriendData>(res.Value.ToString());
+
+        }
+
+        return null;
 
     }
 
