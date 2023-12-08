@@ -10,6 +10,7 @@ public class AddFriendPanel : MonoBehaviour
 
     [SerializeField] private GameObject button;
     [SerializeField] private TMP_Text panelText;
+    [SerializeField] private TMP_Text btnText;
 
     private FirebaseUserData userData;
     private string key;
@@ -30,6 +31,13 @@ public class AddFriendPanel : MonoBehaviour
         
         this.key = key;
         this.userData = userData;
+
+    }
+
+    public void SetBtnText(string btnText)
+    {
+
+        this.btnText.text = btnText;
 
     }
 

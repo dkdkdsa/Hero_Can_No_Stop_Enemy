@@ -28,11 +28,11 @@ public class CommunityUIController : MonoBehaviour
     private async void RefreshFriendAccept()
     {
 
-        var friendReq = await FirebaseManager.Instance.GetFriendReq();
+        var friendReq = await FirebaseManager.Instance.GetFriendReq(FirebaseManager.Instance.CurrentUserId);
         var allUser = await FirebaseManager.Instance.GetAllUser();
         var friends = await FirebaseManager.Instance.GetFriendData(FirebaseManager.Instance.CurrentUserId);
 
-        var slots = acceptFirendParent.GetComponentsInChildren<Slot>();
+        var slots = acceptFirendParent.GetComponentsInChildren<AddFriendPanel>();
 
         foreach(var slot in slots)
         {
@@ -52,6 +52,7 @@ public class CommunityUIController : MonoBehaviour
                 var slot = Instantiate(friendPreafab, acceptFirendParent);
                 slot.SetPanel(user.userData.userName, true);
                 slot.SetUserDataAndKey(item, user.userData);
+                slot.SetBtnText("수락");
                 slot.OnButtonClick += HandleFriendAccept;
 
             } 
@@ -65,7 +66,7 @@ public class CommunityUIController : MonoBehaviour
 
         var friends = await FirebaseManager.Instance.GetFriendData(FirebaseManager.Instance.CurrentUserId);
 
-        var slots = friendParent.GetComponentsInChildren<Slot>();
+        var slots = friendParent.GetComponentsInChildren<AddFriendPanel>();
 
         foreach (var slot in slots)
         {
@@ -88,7 +89,7 @@ public class CommunityUIController : MonoBehaviour
     public async void Serch()
     {
 
-        var slots = addFirendParent.GetComponentsInChildren<Slot>();
+        var slots = addFirendParent.GetComponentsInChildren<AddFriendPanel>();
 
         foreach (var slot in slots)
         {
@@ -98,6 +99,7 @@ public class CommunityUIController : MonoBehaviour
         }
 
         var users = await FirebaseManager.Instance.GetAllUser();
+
 
         var findUser = users.FindAll(
             x => x.userData.userName.Contains(userNameField.text) 
@@ -109,10 +111,15 @@ public class CommunityUIController : MonoBehaviour
             foreach (var user in findUser)
             {
 
+                var reqs = await FirebaseManager.Instance.GetFriendReq(user.key);
+
+                if (reqs.reqs.Contains(FirebaseManager.Instance.CurrentUserId)) continue;
+
                 var slot = Instantiate(friendPreafab, addFirendParent);
 
                 slot.SetPanel(user.userData.userName, true);
                 slot.SetUserDataAndKey(user.key, user.userData);
+                slot.SetBtnText("친구요청");
                 slot.OnButtonClick += HandleFriendReq;
 
             }
@@ -120,10 +127,11 @@ public class CommunityUIController : MonoBehaviour
         }
 
     }
-    private void HandleFriendReq(string userKey, FirebaseUserData userData)
+    private async void HandleFriendReq(string userKey, FirebaseUserData userData)
     {
 
-        FirebaseManager.Instance.SendFriendReq(userKey);
+        await FirebaseManager.Instance.SendFriendReq(userKey);
+        Serch();
 
     }
 
@@ -146,6 +154,9 @@ public class CommunityUIController : MonoBehaviour
             userName = userData.userName,
 
         });
+
+        RefreshFriendAccept();
+        RefreshFriend();
 
     }
 

@@ -31,7 +31,7 @@ public class FirebaseFriendReqData
     public List<string> reqs = new();
 
 }
-[SerializeField]
+[Serializable]
 public class FirebaseFriend
 {
 
@@ -275,7 +275,7 @@ public class FirebaseManager : MonoBehaviour
 
     }
 
-    public async void SendFriendReq(string postUserKey)
+    public async Task SendFriendReq(string postUserKey)
     {
 
         var res = await db.Child("users").Child(postUserKey).Child("FriendReq").GetValueAsync();
@@ -288,12 +288,21 @@ public class FirebaseManager : MonoBehaviour
 
         }
 
+        await db.Child("users").Child(postUserKey).Child("FriendReq").SetValueAsync(JsonUtility.ToJson(data));
+
     }
 
-    public async Task<FirebaseFriendReqData> GetFriendReq()
+    public async Task<FirebaseFriendReqData> GetFriendReq(string userId)
     {
 
-        var res = await db.Child("users").Child(user.UserId).Child("FriendReq").GetValueAsync();
+        var res = await db.Child("users").Child(userId).Child("FriendReq").GetValueAsync();
+
+        if(res == null)
+        {
+
+            return null;
+
+        }
 
         return JsonUtility.FromJson<FirebaseFriendReqData>(res.Value.ToString());
 
@@ -319,10 +328,13 @@ public class FirebaseManager : MonoBehaviour
     {
 
         var res = await GetFriendData(addTo);
+        var res_2 = await GetFriendReq(addTo);
 
         res.friends.Add(friend);
+        res_2.reqs.Remove(friend.userId);
 
-        await db.Child("users").Child(addTo).Child("Friends").SetValueAsync(JsonUtility.ToJson(friend));
+        await db.Child("users").Child(addTo).Child("FriendReq").SetValueAsync(JsonUtility.ToJson(res_2));
+        await db.Child("users").Child(addTo).Child("Friends").SetValueAsync(JsonUtility.ToJson(res));
 
     }
 

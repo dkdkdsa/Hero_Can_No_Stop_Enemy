@@ -6619,8 +6619,8 @@ MonoBehaviour:
   userNameField: {fileID: 1292072894}
   friendPreafab: {fileID: 2063399527529871891, guid: d0b69b05a0c36b44fa63966d847f23c9, type: 3}
   addFirendParent: {fileID: 630074419}
-  acceptFirendParent: {fileID: 1042316079}
-  friendParent: {fileID: 811645266}
+  acceptFirendParent: {fileID: 811645266}
+  friendParent: {fileID: 1042316079}
 --- !u!1 &1705864259
 GameObject:
   m_ObjectHideFlags: 0
