@@ -13,15 +13,51 @@ MonoBehaviour:
   m_Name: TowerData
   m_EditorClassIdentifier: 
   lists:
-  - key: Arrow
-    obj: {fileID: 8353194025080382527, guid: d5cf2a9f3f2add946b3d8dfecb560d86, type: 3}
-    sprite: {fileID: 897027307, guid: fa1943057ca33594d933649b9b1da07a, type: 3}
-    cost: 250
-    towerName: "\uD654\uC0B4\uD0C0\uC6CC"
-    price: 100
   - key: Chicken
     obj: {fileID: 7562046593480239604, guid: 91cef03f3726ced49ba625d2717e31ab, type: 3}
     sprite: {fileID: 970128767, guid: 695850ab4a97b114aaff37ba9d516f39, type: 3}
-    cost: 100
+    cost: 200
     towerName: "\uCE58\uD0A8\uD0C0\uC6CC"
     price: 0
+  - key: Assassin
+    obj: {fileID: 5343718210930654265, guid: c60bd0a264c54364394f329a3482c0cc, type: 3}
+    sprite: {fileID: 1943547046, guid: 0df27802e67dcec4082f45dd3b4b9643, type: 3}
+    cost: 1500
+    towerName: "\uC554\uC0B4\uC790\uD0C0\uC6CC"
+    price: 3000
+  - key: Fish
+    obj: {fileID: 5014400874052085270, guid: 21e86853f3b021d438f9591a738c35cb, type: 3}
+    sprite: {fileID: 34382174, guid: 84803f5afa654654ea46484169f8240f, type: 3}
+    cost: 300
+    towerName: "\uBB3C\uACE0\uAE30\uD0C0\uC6CC"
+    price: 0
+  - key: Flesh
+    obj: {fileID: 4594422767333857691, guid: 3f56233609b6cca4085f55937c73c34f, type: 3}
+    sprite: {fileID: -969282129, guid: fde2c2a87924f7440bff27e3f73a728e, type: 3}
+    cost: 600
+    towerName: "\uC0B4\uB369\uC774\uD0C0\uC6CC"
+    price: 0
+  - key: Muscle
+    obj: {fileID: 5119798071889650188, guid: be053f860474e0741934e212d8a5c578, type: 3}
+    sprite: {fileID: -680248702, guid: 7fbe14ff13496b24bb16cf9860627417, type: 3}
+    cost: 4200
+    towerName: "\uADFC\uC721\uD0C0\uC6CC"
+    price: 15000
+  - key: Mystery
+    obj: {fileID: 386090757477526987, guid: 8fa33f7e610272f48804ad50f4b6d387, type: 3}
+    sprite: {fileID: -1505602895, guid: b9296dd2bd53e8245904e57ae8cdb7a1, type: 3}
+    cost: 1500
+    towerName: "\uBBF8\uC2A4\uD130\uB9AC\uD0C0\uC6CC"
+    price: 7000
+  - key: Plant
+    obj: {fileID: 5740354405964511466, guid: c50a0ee58d3dd4f4094ddca76fb2cea0, type: 3}
+    sprite: {fileID: -789717144, guid: e50df5d0670afe14f9e7ae0fac599344, type: 3}
+    cost: 100
+    towerName: "\uC2DD\uBB3C\uD0C0\uC6CC"
+    price: 1000
+  - key: Skel
+    obj: {fileID: 3806364719682006228, guid: ace5fa583b59cfc418a53d9bc1f04096, type: 3}
+    sprite: {fileID: -1303774769, guid: 25495eba6bea4b9418aa2dd48e4a23eb, type: 3}
+    cost: 100
+    towerName: "\uBF08\uB2E4\uADC0\uD0C0\uC6CC"
+    price: 600

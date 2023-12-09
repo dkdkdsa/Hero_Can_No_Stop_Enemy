@@ -177,8 +177,8 @@ public class FirebaseManager : MonoBehaviour
             userName = userName, 
             loginTime = DateTime.Now.ToString("f"), 
             loginCount = 1, 
-            ableTower = { "Chicken" }, 
-            coin = 500 
+            ableTower = { "Chicken", "Fish", "Flesh" }, 
+            coin = 50000
 
         };
 
