@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using Unity.Netcode;
 using Unity.Services.Lobbies;
@@ -47,6 +48,10 @@ public class LobbyPanel : MonoBehaviour
             Debug.LogException(e);
 
         }
+
+        await Task.Delay(3000);
+
+        if (lobbyUIController == null) return;
 
         lobbyUIController.loadingPanel.SetActive(false);
 
