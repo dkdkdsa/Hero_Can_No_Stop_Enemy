@@ -18,6 +18,40 @@ public class LobbySceneUIController : NetworkBehaviour
 
     }
 
+    public override void OnNetworkSpawn()
+    {
+
+        if (IsHost)
+        {
+
+            HostSingle.Instance.GameManager.OnPlayerDisconnect += HandlePlayerDisconnect;
+
+        }
+
+        if (!IsHost)
+        {
+
+            NetworkManager.Singleton.OnClientStopped += HandleDisconnect;
+
+        }
+
+    }
+
+    private void HandlePlayerDisconnect(string userName, ulong clid)
+    {
+
+        HostSingle.Instance.GameManager.ShutdownAsync();
+        SceneManager.LoadScene(SceneList.MenuScene);
+
+    }
+
+    private void HandleDisconnect(bool obj)
+    {
+
+        SceneManager.LoadScene(SceneList.MenuScene);
+
+    }
+
     private void Update()
     {
 
@@ -39,6 +73,20 @@ public class LobbySceneUIController : NetworkBehaviour
 
         base.OnDestroy();
         HostSingle.Instance.GameManager.OnPlayerConnect -= HandlePlayerConnect;
+
+        if (IsHost)
+        {
+
+            HostSingle.Instance.GameManager.OnPlayerDisconnect -= HandlePlayerDisconnect;
+
+        }
+
+        if (!IsHost)
+        {
+
+            NetworkManager.Singleton.OnClientStopped -= HandleDisconnect;
+
+        }
 
     }
 

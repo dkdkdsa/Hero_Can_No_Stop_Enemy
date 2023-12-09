@@ -46,10 +46,10 @@ public class DefenseManager : NetworkBehaviour
 
         }
 
-        if (!IsHost && !IsServer)
+        if (!IsHost)
         {
 
-            NetworkManager.Singleton.OnServerStopped += HandleDisconnect;
+            NetworkManager.Singleton.OnClientStopped += HandleDisconnect;
 
         }
 
@@ -68,7 +68,7 @@ public class DefenseManager : NetworkBehaviour
         
         base.OnDestroy();
 
-        if (!IsHost && !IsServer)
+        if (!IsHost)
         {
 
             NetworkManager.Singleton.OnServerStopped -= HandleDisconnect;
