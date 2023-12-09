@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DeckSettingUIController : MonoBehaviour
@@ -9,6 +10,7 @@ public class DeckSettingUIController : MonoBehaviour
     [SerializeField] private Transform curDeckPanel;
     [SerializeField] private Slot slotPrefab;
     [SerializeField] private TowerListSO towerData;
+    [SerializeField] private TMP_Text expText;
 
     private void Awake()
     {

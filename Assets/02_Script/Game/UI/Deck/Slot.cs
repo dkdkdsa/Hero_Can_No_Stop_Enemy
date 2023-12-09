@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public delegate void SlotInteractionEvent(string towerKey, Slot slot);
 
-public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
+public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
     private Image icon;
@@ -16,7 +16,8 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
 
     public event SlotInteractionEvent OnPointerDownEvent;
     public event SlotInteractionEvent OnPointerUpEvent;
-    public event SlotInteractionEvent OnPointerMoveEvent;
+    public event SlotInteractionEvent OnPointerEnterEvent;
+    public event SlotInteractionEvent OnPointerExitEvent;
 
     private void Awake()
     {
@@ -49,11 +50,17 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPoin
 
     }
 
-    public void OnPointerMove(PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData)
     {
 
-        OnPointerMoveEvent?.Invoke(towerKey, this);
+        OnPointerEnterEvent?.Invoke(towerKey, this);
 
     }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+
+        OnPointerExitEvent?.Invoke(towerKey, this);
+
+    }
 }

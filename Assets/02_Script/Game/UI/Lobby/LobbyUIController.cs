@@ -18,6 +18,10 @@ public class LobbyUIController : MonoBehaviour
     [SerializeField] private TMP_Text rewardText;
     [SerializeField] private TMP_Text loginCountText;
 
+    private bool isRefreshCoolDown = false;
+
+    public GameObject loadingPanel;
+
     private void Awake()
     {
 
@@ -28,6 +32,9 @@ public class LobbyUIController : MonoBehaviour
 
     public async void Refresh()
     {
+
+        if (isRefreshCoolDown) return; 
+        isRefreshCoolDown = true;
 
         var childs = content.GetComponentsInChildren<LobbyPanel>();
 
@@ -46,6 +53,8 @@ public class LobbyUIController : MonoBehaviour
             Instantiate(lobbyPanelPrefab, content).Set(item);
 
         }
+
+        StartCoroutine(RefreshCoolDown());
 
     }
 
@@ -104,6 +113,14 @@ public class LobbyUIController : MonoBehaviour
         rewardBtn.SetActive(false);
 
         FirebaseManager.Instance.SaveUserData();
+
+    }
+
+    private IEnumerator RefreshCoolDown()
+    {
+
+        yield return new WaitForSeconds(5f);
+        isRefreshCoolDown = false;
 
     }
 

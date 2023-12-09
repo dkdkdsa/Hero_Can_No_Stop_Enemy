@@ -14,6 +14,7 @@ public class LobbyPanel : MonoBehaviour
     [SerializeField] private TMP_Text humanText;
 
     private Lobby lobby;
+    private LobbyUIController lobbyUIController;
 
     public void Set(Lobby lobby)
     {
@@ -23,10 +24,14 @@ public class LobbyPanel : MonoBehaviour
         lobbyNameText.text = lobby.Name;
         humanText.text = $"({lobby.Players.Count}/{lobby.MaxPlayers})";
 
+        lobbyUIController = FindObjectOfType<LobbyUIController>();
+
     }
 
     public async void StartGame()
     {
+
+        lobbyUIController.loadingPanel.SetActive(true);
 
         try
         {
@@ -40,9 +45,10 @@ public class LobbyPanel : MonoBehaviour
         {
 
             Debug.LogException(e);
-            return;
 
         }
+
+        lobbyUIController.loadingPanel.SetActive(false);
 
     }
 

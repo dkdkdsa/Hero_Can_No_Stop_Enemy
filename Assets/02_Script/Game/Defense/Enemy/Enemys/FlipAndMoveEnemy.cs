@@ -30,17 +30,17 @@ public class FlipAndMoveEnemy : EnemyRoot
             spriteRenderer = GetComponent<SpriteRenderer>();
 
         }
-
-        if(rigid.velocity.y != 0)
+        ///
+        if(rigid.velocity.x != 0)
         {
 
-            spriteRenderer.flipX = rigid.velocity.y <= 0;
+            spriteRenderer.flipX = rigid.velocity.x <= 0;
 
         }
         else
         {
 
-            spriteRenderer.flipX = rigid.velocity.x >= 0;
+            spriteRenderer.flipX = rigid.velocity.y <= 0;
 
         }
 
