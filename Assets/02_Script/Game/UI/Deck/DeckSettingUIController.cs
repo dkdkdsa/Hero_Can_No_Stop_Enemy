@@ -40,6 +40,22 @@ public class DeckSettingUIController : MonoBehaviour
 
     }
 
+    private void HandleSlotEnter(string towerKey, Slot slot)
+    {
+
+        var tower = towerData.lists.Find(x => x.key == towerKey);
+
+        expText.text = tower.expText;
+
+    }
+
+    private void HandleSlotExit(string towerKey, Slot slot)
+    {
+
+        expText.text = "";
+
+    }
+
     public void Refresh()
     {
 
@@ -71,6 +87,8 @@ public class DeckSettingUIController : MonoBehaviour
             var slot = Instantiate(slotPrefab, parent);
             slot.SetSlot(tower.sprite, tower.key, tower.towerName);
             slot.OnPointerDownEvent += HandleSlotClick;
+            slot.OnPointerEnterEvent += HandleSlotEnter;
+            slot.OnPointerExitEvent += HandleSlotExit;
 
         }
 

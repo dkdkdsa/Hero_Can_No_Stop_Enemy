@@ -65,7 +65,7 @@ public class EnemyRoot : NetworkBehaviour
             if (OwnerClientId == NetworkManager.Singleton.LocalClientId)
             {
 
-                FindObjectOfType<PlayerMoney>()?.AddMoney((int)maxHP);
+                FindObjectOfType<PlayerMoney>()?.AddMoney((int)maxHP * 5);
 
                 if (Random.value < 0.3f)
                 {

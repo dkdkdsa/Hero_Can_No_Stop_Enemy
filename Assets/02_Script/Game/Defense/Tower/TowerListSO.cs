@@ -13,6 +13,7 @@ public class TowerObj
     public int cost;
     public string towerName;
     public int price;
+    [TextArea] public string expText;
 
 }
 

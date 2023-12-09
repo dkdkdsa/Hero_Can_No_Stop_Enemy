@@ -15,6 +15,7 @@ public class ShopUIController : MonoBehaviour
     [SerializeField] private GameObject panelObject;
     [SerializeField] private TMP_Text buyPanelText;
     [SerializeField] private TMP_Text coinText;
+    [SerializeField] private TMP_Text expText;
 
     private DeckSettingUIController controller;
     private string currentAbleTowerKey;
@@ -108,6 +109,22 @@ public class ShopUIController : MonoBehaviour
 
     }
 
+    private void HandleSlotEnter(string towerKey, Slot slot)
+    {
+
+        var tower = towerData.lists.Find(x => x.key == towerKey);
+
+        expText.text = tower.expText;
+
+    }
+
+    private void HandleSlotExit(string towerKey, Slot slot)
+    {
+
+        expText.text = "";
+
+    }
+
     public void BuyCancel()
     {
 
@@ -141,6 +158,8 @@ public class ShopUIController : MonoBehaviour
                 var slot = Instantiate(slotPrefab, shopSlotParent);
                 slot.SetSlot(item.sprite, item.key, text);
                 slot.OnPointerDownEvent += HandleSlotClick;
+                slot.OnPointerEnterEvent += HandleSlotEnter;
+                slot.OnPointerExitEvent += HandleSlotExit;
 
             }
 

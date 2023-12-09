@@ -9,6 +9,8 @@ public class PlayerDeckSettingController : MonoBehaviour
     [SerializeField] private TowerListSO towerData;
     [SerializeField] private SpriteRenderer towerSpawnAreaSprite;
     [SerializeField] private AreaObject towerCreateArea;
+    [SerializeField] private GameObject rangeObj;
+
     private Rect rect => new Rect(
         towerSpawnAreaSprite.transform.position.x - 1.3f / 2, 
         towerSpawnAreaSprite.transform.position.y - 1.3f / 2, 
@@ -37,6 +39,7 @@ public class PlayerDeckSettingController : MonoBehaviour
 
         Vector2 dir = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         towerSpawnAreaSprite.transform.position = dir;
+        rangeObj.transform.position = dir;
 
 
         if (Input.GetMouseButtonUp(0))
@@ -57,7 +60,7 @@ public class PlayerDeckSettingController : MonoBehaviour
         if (!createAble) return;
         createAble = false;
 
-        if (playerMoney.GetMoney() < towerData.lists.Find(x => x.key == towerKey).cost) return;
+        rangeObj.SetActive(false);
 
         DefenseManager.Instance.SpawnTowerServerRPC(
             towerKey,
@@ -107,6 +110,13 @@ public class PlayerDeckSettingController : MonoBehaviour
         towerSpawnAreaSprite.gameObject.SetActive(true);
         isTowerCreating = true;
         towerKey = key;
+
+        rangeObj.SetActive(true);
+
+        var len = towerData.lists.Find(x => x.key == towerKey).obj.GetComponent<TowerRoot>().LvDataList[0].attackRange;
+
+        rangeObj.transform.localScale = new Vector3(len, len, len);
+
 
     }
 

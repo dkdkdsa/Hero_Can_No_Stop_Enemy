@@ -39,6 +39,34 @@ public class DefenseManager : NetworkBehaviour
 
         }
 
+        if (!IsHost && !IsServer)
+        {
+
+            NetworkManager.Singleton.OnServerStopped += HandleDisconnect;
+
+        }
+
+    }
+
+    public override void OnDestroy()
+    {
+        
+        base.OnDestroy();
+
+        if (!IsHost && !IsServer)
+        {
+
+            NetworkManager.Singleton.OnServerStopped -= HandleDisconnect;
+
+        }
+
+    }
+
+    private void HandleDisconnect(bool obj)
+    {
+
+        SceneManager.LoadScene(SceneList.MenuScene);
+
     }
 
     private void Update()

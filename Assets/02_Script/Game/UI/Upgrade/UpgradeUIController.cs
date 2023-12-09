@@ -15,6 +15,7 @@ public class UpgradeUIController : MonoBehaviour
     [SerializeField] private TMP_Text rangeText;
     [SerializeField] private TMP_Text upgradeText;
     [SerializeField] private TowerListSO towerData;
+    [SerializeField] private GameObject rangeObj;
 
     private TowerRoot tower;
     private PlayerMoney money;
@@ -50,6 +51,7 @@ public class UpgradeUIController : MonoBehaviour
     {
 
         tower = null;
+        rangeObj.SetActive(false);
         gameObject.SetActive(false);
 
     }
@@ -75,6 +77,12 @@ public class UpgradeUIController : MonoBehaviour
         towerIcon.sprite = data.sprite;
         towerText.text = data.towerName;
         towerLevelText.text = $"LV : {tower.CurLv + 1}";
+
+        var len = tower.LvDataList[tower.CurLv].attackRange;
+
+        rangeObj.gameObject.SetActive(true);
+        rangeObj.transform.position = tower.transform.position;
+        rangeObj.transform.localScale = new Vector3(len, len, len);
 
         var str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackPower.ToString("0.##");
         attackText.text = $"{tower.LvDataList[tower.CurLv].attackPower} -> {str}";

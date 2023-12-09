@@ -19,45 +19,69 @@ MonoBehaviour:
     cost: 200
     towerName: "\uCE58\uD0A8\uD0C0\uC6CC"
     price: 0
+    expText: "\uCE58\uD0A8\uD0C0\uC6CC\uB294 \uAC00\uC7A5 \uAE30\uBCF8\uC801\uC778
+      \uC2A4\uD0C0\uD2B8 \uD0C0\uC6CC\uC785\uB2C8\uB2E4\n\uCD08\uBC18 \uBC29\uC5B4\uC5D0
+      \uC801\uD569 \uD569\uB2C8\uB2E4"
   - key: Assassin
     obj: {fileID: 5343718210930654265, guid: c60bd0a264c54364394f329a3482c0cc, type: 3}
     sprite: {fileID: 1943547046, guid: 0df27802e67dcec4082f45dd3b4b9643, type: 3}
     cost: 1500
     towerName: "\uC554\uC0B4\uC790\uD0C0\uC6CC"
     price: 3000
+    expText: "\uC554\uC0B4\uC790\uD0C0\uC6CC\uB294 \uC6D0\uAC70\uB9AC \uD2B9\uD654\uD615
+      \uD0C0\uC6CC\uC785\uB2C8\uB2E4\n\uACF5\uACA9\uC18D\uB3C4\uAC00 \uB0AE\uC740
+      \uB300\uC2E0 \uAC15\uD55C \uACF5\uACA9\uC744 \uB0A0\uB9BD\uB2C8\uB2E4"
   - key: Fish
     obj: {fileID: 5014400874052085270, guid: 21e86853f3b021d438f9591a738c35cb, type: 3}
     sprite: {fileID: 34382174, guid: 84803f5afa654654ea46484169f8240f, type: 3}
     cost: 300
     towerName: "\uBB3C\uACE0\uAE30\uD0C0\uC6CC"
     price: 0
+    expText: "\uBB3C\uACE0\uAE30\uD0C0\uC6CC\uB294 \uAC00\uC7A5 \uAE30\uBCF8\uC801\uC778
+      \uC2A4\uD0C0\uD2B8 \uD0C0\uC6CC\uC785\uB2C8\uB2E4\n\uC911-\uD6C4\uBC18\uBC29\uC5B4\uC5D0
+      \uC801\uD569\uD569\uB2C8\uB2E4"
   - key: Flesh
     obj: {fileID: 4594422767333857691, guid: 3f56233609b6cca4085f55937c73c34f, type: 3}
     sprite: {fileID: -969282129, guid: fde2c2a87924f7440bff27e3f73a728e, type: 3}
     cost: 600
     towerName: "\uC0B4\uB369\uC774\uD0C0\uC6CC"
     price: 0
+    expText: "\uB204\uAC00 \uC774\uB7F0 \uC0B4\uB369\uC774\uB97C \uD0C0\uC6CC\uB77C\uACE0
+      \uC0DD\uAC01\uD560\uAE4C\uC694?\n\uC774 \uD0C0\uC6CC\uB294 MAX\uB808\uBCA8\uC774
+      \uB41C\uB2E4\uBA74 \uC9C4\uC815\uD55C \uD798\uC744 \uBC1C\uD718\uD569\uB2C8\uB2E4"
   - key: Muscle
     obj: {fileID: 5119798071889650188, guid: be053f860474e0741934e212d8a5c578, type: 3}
     sprite: {fileID: -680248702, guid: 7fbe14ff13496b24bb16cf9860627417, type: 3}
     cost: 4200
     towerName: "\uADFC\uC721\uD0C0\uC6CC"
     price: 15000
+    expText: "\uADFC\uC721\uD0C0\uC6CC\uB294 \uCD08\uBC18\uC5D0\uB294 \uC801\uD569\uD558\uC9C0
+      \uC54A\uC9C0\uB9CC\n\uD6C4\uBC18\uC5D0 \uC9C4\uC815\uD55C \uD798\uC744 \uBC1C\uD718\uD569\uB2C8\uB2E4\n\uC544\uC8FC\uBE60\uB978
+      \uC5F0\uC0AC\uACF5\uACA9\uC744 \uD569\uB2C8\uB2E4"
   - key: Mystery
     obj: {fileID: 386090757477526987, guid: 8fa33f7e610272f48804ad50f4b6d387, type: 3}
     sprite: {fileID: -1505602895, guid: b9296dd2bd53e8245904e57ae8cdb7a1, type: 3}
     cost: 1500
     towerName: "\uBBF8\uC2A4\uD130\uB9AC\uD0C0\uC6CC"
     price: 7000
+    expText: "\uD0C0\uC6CC\uC911\uC5D0\uC11C \uAC00\uC7A5 \uBBF8\uC2A4\uD130\uB9AC\uD55C
+      \uBBF8\uC2A4\uD130\uB9AC\uD0C0\uC6CC!\n\uC774 \uD0C0\uC6CC\uB294 \uC18D\uB3C4\uB294
+      \uB290\uB9AC\uC9C0\uB9CC 1\uBC1C 1\uBC1C \uAC15\uB825\uD55C \uACF5\uACA9\uC744
+      \uD569\uB2C8\uB2E4"
   - key: Plant
     obj: {fileID: 5740354405964511466, guid: c50a0ee58d3dd4f4094ddca76fb2cea0, type: 3}
     sprite: {fileID: -789717144, guid: e50df5d0670afe14f9e7ae0fac599344, type: 3}
     cost: 100
     towerName: "\uC2DD\uBB3C\uD0C0\uC6CC"
     price: 1000
+    expText: "\uB204\uAC00 \uC2DD\uBB3C\uC740 \uC804\uC7A5\uC5D0\uC11C \uD544\uC694\uC5C6\uB2E4\uACE0
+      \uD588\uB098\uC694?\n\uC2DD\uBB3C\uD0C0\uC6CC\uB294 \uCD08\uBC18\uC5D0\uB294
+      \uC57D\uD558\uC9C0\uB9CC \uD6C4\uBC18\uC5D0 \uBE5B\uC744 \uBC1C\uD558\uB294\n\uD0C0\uC6CC\uC785\uB2C8\uB2E4"
   - key: Skel
     obj: {fileID: 3806364719682006228, guid: ace5fa583b59cfc418a53d9bc1f04096, type: 3}
     sprite: {fileID: -1303774769, guid: 25495eba6bea4b9418aa2dd48e4a23eb, type: 3}
     cost: 100
     towerName: "\uBF08\uB2E4\uADC0\uD0C0\uC6CC"
     price: 600
+    expText: "\uBF08\uB2E4\uADC0\uB9CC\uC788\uB294 \uD0C0\uC6CC\uB294 \uC57D\uD574\uBCF4\uC778\uB2E4\uACE0\uC694?\n\uC774
+      \uD0C0\uC6CC\uB294 1\uBC1C 1\uBC1C \uAC15\uB825\uD55C \uACF5\uACA9\uC744 \uD569\uB2C8\uB2E4!"
