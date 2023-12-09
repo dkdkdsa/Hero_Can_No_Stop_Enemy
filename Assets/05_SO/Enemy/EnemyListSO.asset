@@ -13,15 +13,35 @@ MonoBehaviour:
   m_Name: EnemyListSO
   m_EditorClassIdentifier: 
   list:
-  - key: Slime
+  - key: Mummy
     minTime: 0
     weight: 0.5
-    netObj: {fileID: 2670681595076466939, guid: e323d99647538c043b8642b559c3cb25, type: 3}
-  - key: PSlime
+    netObj: {fileID: 4406547230227748164, guid: 0a40bf2166a61dc4b898c5544ce3dbbc, type: 3}
+  - key: Pumpkin
+    minTime: 10
+    weight: 1
+    netObj: {fileID: 6950012517998806654, guid: b6fc34e19953bfd4586e99dbadc6e0bf, type: 3}
+  - key: XMarsMummy
+    minTime: 15
+    weight: 2
+    netObj: {fileID: 8917347707145079988, guid: aad19273255f467498142a2e193a84e0, type: 3}
+  - key: Scorpion
+    minTime: 25
+    weight: 3
+    netObj: {fileID: 671513024891183494, guid: c57d433becd80904c80d881cdd29d099, type: 3}
+  - key: GoldScorpion
+    minTime: 40
+    weight: 5
+    netObj: {fileID: 3090047281597609939, guid: f61a28ccd6353ff4d8877b6e5e21a890, type: 3}
+  - key: BigWorm
     minTime: 30
-    weight: 0.7
-    netObj: {fileID: 3922513319296310449, guid: 00e7952797f86964e92ac5126360362a, type: 3}
-  - key: Devil
+    weight: 1
+    netObj: {fileID: 7409404503501645408, guid: 88d1b6bd25e0fcf4382b8226eb75f8b4, type: 3}
+  - key: Dog
+    minTime: 60
+    weight: 5
+    netObj: {fileID: 5559204842413811091, guid: 20f2d760dfc79d74886fdd813ad5182f, type: 3}
+  - key: Golem
     minTime: 120
-    weight: 1.5
-    netObj: {fileID: 2520244620721151317, guid: 83cb7f24d20b87f4fb7ace45d5460b59, type: 3}
+    weight: 10
+    netObj: {fileID: 7677264269498477769, guid: 600572992cc3f86429db9097af77b431, type: 3}

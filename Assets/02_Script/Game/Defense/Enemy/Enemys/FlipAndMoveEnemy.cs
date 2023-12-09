@@ -31,7 +31,19 @@ public class FlipAndMoveEnemy : EnemyRoot
 
         }
 
-        spriteRenderer.flipX = rigid.velocity.x >= 0;
+        if(rigid.velocity.y != 0)
+        {
+
+            spriteRenderer.flipX = rigid.velocity.y <= 0;
+
+        }
+        else
+        {
+
+            spriteRenderer.flipX = rigid.velocity.x >= 0;
+
+        }
+
 
     }
 

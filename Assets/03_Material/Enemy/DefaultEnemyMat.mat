@@ -13,9 +13,7 @@ Material:
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
   - _ENABLEADDCOLOR_ON
-  - _ENABLESINESCALE_ON
   - _ENABLEVIBRATE_ON
-  - _ENABLEWIGGLE_ON
   - _SHADERFADING_NONE
   - _SHADERSPACE_UV
   - _WIGGLEFIXEDGROUNDTOGGLE_ON
@@ -233,7 +231,7 @@ Material:
     - _EnableSineGlow: 0
     - _EnableSineMove: 0
     - _EnableSineRotate: 0
-    - _EnableSineScale: 1
+    - _EnableSineScale: 0
     - _EnableSmoke: 0
     - _EnableSmoothPixelArt: 0
     - _EnableSourceAlphaDissolve: 0
@@ -247,7 +245,7 @@ Material:
     - _EnableUVScale: 0
     - _EnableUVScroll: 0
     - _EnableVibrate: 1
-    - _EnableWiggle: 1
+    - _EnableWiggle: 0
     - _EnableWind: 0
     - _EnableWorldTiling: 0
     - _EnchantedBrightness: 1
