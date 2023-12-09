@@ -32,6 +32,8 @@ public class CommunityUIController : MonoBehaviour
         var allUser = await FirebaseManager.Instance.GetAllUser();
         var friends = await FirebaseManager.Instance.GetFriendData(FirebaseManager.Instance.CurrentUserId);
 
+        if (acceptFirendParent == null) return;
+
         var slots = acceptFirendParent.GetComponentsInChildren<AddFriendPanel>();
 
         foreach(var slot in slots)
