@@ -39,12 +39,27 @@ public class DefenseManager : NetworkBehaviour
 
         }
 
+        if (IsHost)
+        {
+
+            HostSingle.Instance.GameManager.OnPlayerDisconnect += HandlePlayerDisconnect;
+
+        }
+
         if (!IsHost && !IsServer)
         {
 
             NetworkManager.Singleton.OnServerStopped += HandleDisconnect;
 
         }
+
+    }
+
+    private void HandlePlayerDisconnect(string userName, ulong clid)
+    {
+
+        HostSingle.Instance.GameManager.ShutdownAsync();
+        SceneManager.LoadScene(SceneList.MenuScene);
 
     }
 
@@ -57,6 +72,13 @@ public class DefenseManager : NetworkBehaviour
         {
 
             NetworkManager.Singleton.OnServerStopped -= HandleDisconnect;
+
+        }
+
+        if (IsHost)
+        {
+
+            HostSingle.Instance.GameManager.OnPlayerDisconnect -= HandlePlayerDisconnect;
 
         }
 
