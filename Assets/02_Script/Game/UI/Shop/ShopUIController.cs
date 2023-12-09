@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class ShopUIController : MonoBehaviour
 {
@@ -43,14 +44,19 @@ public class ShopUIController : MonoBehaviour
 
     }
 
-    private void UpdatePanel()
+    private async void UpdatePanel()
     {
 
         var tower = towerData.lists.Find(x => x.key == currentAbleTowerKey);
 
         if (tower == null) return;
 
-        SetPanel($"{tower.towerName}을/를 {tower.price}$에 구매하시겠습니까?");
+        var discountList = await FirebaseManager.Instance.GetDiscountTower();
+        var isDiscount = discountList.Contains(tower.key);
+
+        var price = isDiscount ? tower.price / 2 : tower.price;
+
+        SetPanel($"{tower.towerName}을/를 {price}$에 구매하시겠습니까?");
 
     }
 
@@ -69,18 +75,23 @@ public class ShopUIController : MonoBehaviour
 
     }
 
-    public void BuyTower()
+    public async void BuyTower()
     {
 
         var tower = towerData.lists.Find(x => x.key == currentAbleTowerKey);
+        var discountList = await FirebaseManager.Instance.GetDiscountTower();
 
         if (tower != null)
         {
 
-            if (FirebaseManager.Instance.userData.coin >= tower.price)
+            var isDiscount = discountList.Contains(tower.key);
+
+            var price = isDiscount ? tower.price / 2 : tower.price;
+
+            if (FirebaseManager.Instance.userData.coin >= price)
             {
 
-                FirebaseManager.Instance.userData.coin -= tower.price;
+                FirebaseManager.Instance.userData.coin -= price;
                 DeckManager.Instance.AbleTowerLs.Add(tower.key);
                 controller.Refresh();
                 Refresh();
@@ -105,10 +116,11 @@ public class ShopUIController : MonoBehaviour
 
     }
 
-    public void Refresh()
+    public async void Refresh()
     {
 
         var slots = shopSlotParent.GetComponentsInChildren<Slot>();
+        var discountList = await FirebaseManager.Instance.GetDiscountTower();
 
         foreach(var slot in slots)
         {
@@ -123,8 +135,12 @@ public class ShopUIController : MonoBehaviour
             if (!DeckManager.Instance.AbleTowerLs.Contains(item.key))
             {
 
+                var isDiscount = discountList.Contains(item.key);
+
+                var text = isDiscount ? $"할인! {item.price / 2}" : item.price.ToString();
+
                 var slot = Instantiate(slotPrefab, shopSlotParent);
-                slot.SetSlot(item.sprite, item.key, item.price.ToString());
+                slot.SetSlot(item.sprite, item.key, text);
                 slot.OnPointerDownEvent += HandleSlotClick;
 
             }

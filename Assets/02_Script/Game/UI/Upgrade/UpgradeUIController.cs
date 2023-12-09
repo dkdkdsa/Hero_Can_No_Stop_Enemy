@@ -76,13 +76,13 @@ public class UpgradeUIController : MonoBehaviour
         towerText.text = data.towerName;
         towerLevelText.text = $"LV : {tower.CurLv + 1}";
 
-        var str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackPower.ToString("#.##");
+        var str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackPower.ToString("0.##");
         attackText.text = $"{tower.LvDataList[tower.CurLv].attackPower} -> {str}";
 
-        str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackRange.ToString("#.##");
+        str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackRange.ToString("0.##");
         rangeText.text = $"{tower.LvDataList[tower.CurLv].attackRange} -> {str}";
 
-        str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackCoolDown.ToString("#.##");
+        str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackCoolDown.ToString("0.##");
         coolDownText.text = $"{tower.LvDataList[tower.CurLv].attackCoolDown} -> {str}";
 
         str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv].levelUpCost.ToString() + "$";

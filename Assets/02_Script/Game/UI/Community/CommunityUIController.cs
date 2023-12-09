@@ -138,7 +138,7 @@ public class CommunityUIController : MonoBehaviour
     private async void HandleFriendAccept(string userKey, FirebaseUserData userData)
     {
 
-         await FirebaseManager.Instance.AddFriend(userKey,
+        await FirebaseManager.Instance.AddFriend(userKey,
             new FirebaseFriend
             {
 

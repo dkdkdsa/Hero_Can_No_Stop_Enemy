@@ -19,4 +19,10 @@ MonoBehaviour:
   - poolingKey: Bullet
     poolingObject: {fileID: 4788451372852981063, guid: 863ea10f74060434dad84c5e73e647eb, type: 3}
     poolCount: 100
+  - poolingKey: ShootFX
+    poolingObject: {fileID: 4173496852136740230, guid: 988b35df01e9eb54483d695ac1a3a1b7, type: 3}
+    poolCount: 100
+  - poolingKey: BulletHitFX
+    poolingObject: {fileID: 7641293990456687950, guid: d0c2753f1284be54598dead176145f27, type: 3}
+    poolCount: 100
   scenePoolingObjects: []

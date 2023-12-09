@@ -65,6 +65,7 @@ public class GunTower : TowerRoot
         {
 
             FAED.TakePool<Bullet>("Bullet").Shoot(target.transform, levelData[CurLv].attackPower, currentGun.shootPos.position);
+            FAED.TakePool<ParticleSystem>("ShootFX", currentGun.shootPos.position).Play();
 
             if (IsOwner)
             {

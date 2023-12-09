@@ -21,6 +21,7 @@ public class FirebaseUserData
     public int coin;
     public int loginCount;
     public string loginTime;
+    public bool isRewardGet;
 
 }
 
@@ -31,6 +32,7 @@ public class FirebaseFriendReqData
     public List<string> reqs = new();
 
 }
+
 [Serializable]
 public class FirebaseFriend
 {
@@ -63,12 +65,14 @@ public class FirebaseManager : MonoBehaviour
     public static FirebaseManager Instance;
     public string CurrentUserId => user.UserId;
 
-    public void StartAuth()
+    public async Task StartAuth()
     {
 
         Instance = this;
 
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
+        await FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
+        {
+
             var dependencyStatus = task.Result;
             if (dependencyStatus == DependencyStatus.Available)
             {
@@ -215,6 +219,7 @@ public class FirebaseManager : MonoBehaviour
                 if ((DateTime.Now - t).TotalMinutes > 1)
                 {
 
+                    userData.isRewardGet = false;
                     IsContinuousLogIn = true;
                     userData.loginCount++;
 
@@ -222,8 +227,9 @@ public class FirebaseManager : MonoBehaviour
                 else if((DateTime.Now - t).TotalDays > 1)
                 {
 
+                    userData.isRewardGet = false;
                     IsContinuousLogIn = false;
-                    userData.loginCount = 0;
+                    userData.loginCount = 1;
 
                 }
 
@@ -335,6 +341,17 @@ public class FirebaseManager : MonoBehaviour
 
         await db.Child("users").Child(addTo).Child("FriendReq").SetValueAsync(JsonUtility.ToJson(res_2));
         await db.Child("users").Child(addTo).Child("Friends").SetValueAsync(JsonUtility.ToJson(res));
+
+    }
+
+    public async Task<List<string>> GetDiscountTower()
+    {
+
+        var res = await db.Child("Discount").Child("discountTower").GetValueAsync();
+
+        List<string> result = res.Value.ToString().Split(',').ToList();
+
+        return result;
 
     }
 

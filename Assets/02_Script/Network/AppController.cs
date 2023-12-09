@@ -48,7 +48,7 @@ public class AppController : MonoBehaviour
         client.CreateClient();
 
         FirebaseManager firebaseManager = Instantiate(firebaseManagerPrefab, transform);
-        firebaseManager.StartAuth();
+        await firebaseManager.StartAuth();
 
         SceneManager.LoadScene(SceneList.LoginScene);
 

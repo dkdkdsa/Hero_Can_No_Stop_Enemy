@@ -11,7 +11,12 @@ public class LobbyUIController : MonoBehaviour
     [SerializeField] private LobbyPanel lobbyPanelPrefab;
     [SerializeField] private TMP_InputField lobbyNameField;
     [SerializeField] private Transform content;
+
+    [Header("보상")]
     [SerializeField] private GameObject rewardBtn;
+    [SerializeField] private GameObject rewardPanel;
+    [SerializeField] private TMP_Text rewardText;
+    [SerializeField] private TMP_Text loginCountText;
 
     private void Awake()
     {
@@ -69,7 +74,7 @@ public class LobbyUIController : MonoBehaviour
     private void CheckReword()
     {
 
-        if (FirebaseManager.Instance.IsContinuousLogIn)
+        if (FirebaseManager.Instance.IsContinuousLogIn && FirebaseManager.Instance.userData.isRewardGet == false)
         {
 
             rewardBtn.SetActive(true);
@@ -80,6 +85,23 @@ public class LobbyUIController : MonoBehaviour
 
     public void Save()
     {
+
+        FirebaseManager.Instance.SaveUserData();
+
+    }
+
+    public void GetReward()
+    {
+
+        int reward = 100 * FirebaseManager.Instance.userData.loginCount;
+
+        FirebaseManager.Instance.userData.coin += reward;
+        FirebaseManager.Instance.userData.isRewardGet = true;
+
+        rewardPanel.SetActive(true);
+        loginCountText.text = $"연속로그인 {FirebaseManager.Instance.userData.loginCount}일차!";
+        rewardText.text = $" {reward}코인 획득!";
+        rewardBtn.SetActive(false);
 
         FirebaseManager.Instance.SaveUserData();
 
