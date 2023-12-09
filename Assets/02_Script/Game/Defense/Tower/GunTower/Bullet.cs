@@ -56,6 +56,8 @@ public class Bullet : MonoBehaviour
 
             }
 
+            FAED.TakePool<ParticleSystem>("BulletHitFX", transform.position).Play();
+
             Disable();
 
         }
