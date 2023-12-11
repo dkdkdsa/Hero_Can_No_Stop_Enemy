@@ -56,11 +56,10 @@ public class PlayerDeckSettingController : MonoBehaviour
 
         towerSpawnAreaSprite.gameObject.SetActive(false);
         isTowerCreating = false;
+        rangeObj.SetActive(false);
 
         if (!createAble) return;
         createAble = false;
-
-        rangeObj.SetActive(false);
 
         DefenseManager.Instance.SpawnTowerServerRPC(
             towerKey,
@@ -115,8 +114,7 @@ public class PlayerDeckSettingController : MonoBehaviour
 
         var len = towerData.lists.Find(x => x.key == towerKey).obj.GetComponent<TowerRoot>().LvDataList[0].attackRange;
 
-        rangeObj.transform.localScale = new Vector3(len, len, len);
-
+        rangeObj.transform.localScale = new Vector3(len, len, len) * 2;
 
     }
 

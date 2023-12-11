@@ -82,7 +82,7 @@ public class UpgradeUIController : MonoBehaviour
 
         rangeObj.gameObject.SetActive(true);
         rangeObj.transform.position = tower.transform.position;
-        rangeObj.transform.localScale = new Vector3(len, len, len);
+        rangeObj.transform.localScale = new Vector3(len, len, len) * 2;
 
         var str = tower.CurLv + 1 == tower.LvDataList.Count ? "MAX" : tower.LvDataList[tower.CurLv + 1].attackPower.ToString("0.##");
         attackText.text = $"{tower.LvDataList[tower.CurLv].attackPower} -> {str}";

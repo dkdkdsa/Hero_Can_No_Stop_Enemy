@@ -18,6 +18,7 @@ public class ResultUIController : NetworkBehaviour
 
             ulong dieClient = (ulong)PlayerPrefs.GetInt("DieClient");
             SetTextClientRPC(dieClient);
+            StartCoroutine(AutoShotdownCo());
 
         }
 
@@ -26,13 +27,6 @@ public class ResultUIController : NetworkBehaviour
     [ClientRpc]
     private void SetTextClientRPC(ulong dieClient)
     {
-
-        if (IsHost)
-        {
-
-            HostSingle.Instance.GameManager.ShutdownAsync();
-
-        }
 
         if(NetworkManager.Singleton.LocalClientId == dieClient)
         {
@@ -52,7 +46,29 @@ public class ResultUIController : NetworkBehaviour
     public void GoTitle()
     {
 
+
+        if (IsHost)
+        {
+
+            HostSingle.Instance.GameManager.ShutdownAsync();
+
+        }
+
         SceneManager.LoadScene(SceneList.MenuScene);
+
+    }
+
+    private IEnumerator AutoShotdownCo()
+    {
+
+        yield return new WaitForSeconds(1);
+
+        if (IsHost)
+        {
+
+            HostSingle.Instance.GameManager.ShutdownAsync();
+
+        }
 
     }
 

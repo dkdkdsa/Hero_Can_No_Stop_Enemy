@@ -80,6 +80,13 @@ public class LobbyUIController : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        
+        CheckReword();
+
+    }
+
     private void CheckReword()
     {
 
@@ -92,14 +99,14 @@ public class LobbyUIController : MonoBehaviour
 
     }
 
-    public void Save()
+    public async void Save()
     {
 
-        FirebaseManager.Instance.SaveUserData();
+        await FirebaseManager.Instance.SaveUserData();
 
     }
 
-    public void GetReward()
+    public async void GetReward()
     {
 
         int reward = 100 * FirebaseManager.Instance.userData.loginCount;
@@ -112,7 +119,7 @@ public class LobbyUIController : MonoBehaviour
         rewardText.text = $" {reward}ÄÚÀÎ È¹µæ!";
         rewardBtn.SetActive(false);
 
-        FirebaseManager.Instance.SaveUserData();
+        await FirebaseManager.Instance.SaveUserData();
 
     }
 

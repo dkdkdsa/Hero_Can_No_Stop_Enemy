@@ -224,11 +224,12 @@ public class FirebaseManager : MonoBehaviour
                     userData.loginCount++;
 
                 }
-                else if((DateTime.Now - t).TotalDays > 1)
+
+                if((DateTime.Now - t).TotalMinutes >= 3)
                 {
 
                     userData.isRewardGet = false;
-                    IsContinuousLogIn = false;
+                    IsContinuousLogIn = true;
                     userData.loginCount = 1;
 
                 }
@@ -239,14 +240,19 @@ public class FirebaseManager : MonoBehaviour
 
             DeckManager.Instance.DeckLs = userData.deck;
             DeckManager.Instance.AbleTowerLs = userData.ableTower;
+            await SaveUserData();
+
+        }
+        else
+        {
+
+            Debug.LogError("데이터 로딩중 에러 발생");
 
         }
 
-        SaveUserData();
-
     }
 
-    public void SaveUserData()
+    public async Task SaveUserData()
     {
 
         if (user == null) return;
@@ -254,7 +260,7 @@ public class FirebaseManager : MonoBehaviour
         userData.deck = DeckManager.Instance.DeckLs;
         userData.ableTower = DeckManager.Instance.AbleTowerLs;
 
-        db.Child("users").Child(user.UserId).Child("UserData").SetValueAsync(JsonUtility.ToJson(userData));
+        await db.Child("users").Child(user.UserId).Child("UserData").SetValueAsync(JsonUtility.ToJson(userData));
 
     }
 
@@ -347,7 +353,9 @@ public class FirebaseManager : MonoBehaviour
     public async Task<List<string>> GetDiscountTower()
     {
 
-        var res = await db.Child("Discount").Child("discountTower").GetValueAsync();
+        var res = await db.Child("Discount").GetValueAsync();
+
+        Debug.Log(res.Value);
 
         List<string> result = res.Value.ToString().Split(',').ToList();
 
@@ -355,13 +363,13 @@ public class FirebaseManager : MonoBehaviour
 
     }
 
-    private void OnDestroy()
+    private async void OnDestroy()
     {
         
         if(db != null && DeckManager.Instance != null)
         {
 
-            SaveUserData();
+            await SaveUserData();
 
         }
 

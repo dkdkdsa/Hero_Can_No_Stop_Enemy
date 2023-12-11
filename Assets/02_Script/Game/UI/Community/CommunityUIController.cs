@@ -116,8 +116,10 @@ public class CommunityUIController : MonoBehaviour
             {
 
                 var reqs = await FirebaseManager.Instance.GetFriendReq(user.key);
+                var frends = await FirebaseManager.Instance.GetFriendData(user.key);
 
-                if (reqs.reqs.Contains(FirebaseManager.Instance.CurrentUserId)) continue;
+                if (reqs.reqs.Contains(FirebaseManager.Instance.CurrentUserId) 
+                    || frends.friends.Find(x => x.userId == FirebaseManager.Instance.CurrentUserId) != null) continue;
 
                 var slot = Instantiate(friendPreafab, addFirendParent);
 
@@ -170,7 +172,7 @@ public class CommunityUIController : MonoBehaviour
         while (true)
         {
 
-            yield return new WaitForSeconds(10f);
+            yield return new WaitForSeconds(5f);
             RefreshFriendAccept();
             RefreshFriend();
 

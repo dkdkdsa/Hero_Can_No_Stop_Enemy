@@ -7,10 +7,12 @@ public delegate void OnMoneyValueChangeEvent(int changeValue);
 public class PlayerMoney : MonoBehaviour
 {
 
-    private int money = 600;
+    private int money = 60000;
 
     public event OnMoneyValueChangeEvent OnMoneyChangeEvent;
-
+    /// <summary>
+    /// 
+    /// </summary>
     private void Start()
     {
         

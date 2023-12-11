@@ -25,4 +25,7 @@ MonoBehaviour:
   - poolingKey: BulletHitFX
     poolingObject: {fileID: 7641293990456687950, guid: d0c2753f1284be54598dead176145f27, type: 3}
     poolCount: 100
+  - poolingKey: MoneyText
+    poolingObject: {fileID: 6288820787291128004, guid: fa9d502597efd7d45bc3b0b679fb93ea, type: 3}
+    poolCount: 30
   scenePoolingObjects: []

@@ -1,3 +1,4 @@
+using FD.Dev;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Netcode;
@@ -57,6 +58,7 @@ public class EnemyRoot : NetworkBehaviour
         if (hp <= 0) return;
 
         hp -= damage;
+        SoundManager.Instance.PlaySound("Hit");
         feedbackPlayer.PlayFeedbackServerRPC(damage);
 
         if (hp <= 0)
@@ -66,8 +68,9 @@ public class EnemyRoot : NetworkBehaviour
             {
 
                 FindObjectOfType<PlayerMoney>()?.AddMoney((int)maxHP * 5);
+                FAED.TakePool<MoneyTextEffect>("MoneyText", transform.position).SetText((int)maxHP * 5);
 
-                if (Random.value < 0.3f)
+                if (Random.value < 0.7f)
                 {
 
                     DefenseManager.Instance.SpawnEnemyServerRPC(prefabKey, OwnerClientId);

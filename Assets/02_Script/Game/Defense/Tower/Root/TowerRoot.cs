@@ -173,6 +173,8 @@ public abstract class TowerRoot : NetworkBehaviour
 
         var list = DefenseManager.Instance.GetEnemys(OwnerClientId);
 
+        if (idx >= list.Count) return;
+
         target = list[idx];
         isSetTargetCalled = false;
 

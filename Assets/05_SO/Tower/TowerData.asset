@@ -85,3 +85,12 @@ MonoBehaviour:
     price: 600
     expText: "\uBF08\uB2E4\uADC0\uB9CC\uC788\uB294 \uD0C0\uC6CC\uB294 \uC57D\uD574\uBCF4\uC778\uB2E4\uACE0\uC694?\n\uC774
       \uD0C0\uC6CC\uB294 1\uBC1C 1\uBC1C \uAC15\uB825\uD55C \uACF5\uACA9\uC744 \uD569\uB2C8\uB2E4!"
+  - key: CowBoy
+    obj: {fileID: 5474126228150596136, guid: d5ba9d2da7b24e040853e1db053fea96, type: 3}
+    sprite: {fileID: -1529784634, guid: 6c93e2e05cb7b694980a866c8a064e96, type: 3}
+    cost: 550
+    towerName: "\uBF08\uB2E4\uADC0\uD0C0\uC6CC"
+    price: 7500
+    expText: "\uC9C0\uAE08\uC774 \uC11C\uBD80\uC2DC\uB300\uB77C\uACE0 \uCC29\uAC01\uD558\uACE0\uC788\uB294
+      \uCE74\uC6B0\uBCF4\uC774\uD0C0\uC6CC!\n\uC774 \uD0C0\uC6CC\uB294 6\uBC88 \uACF5\uACA9\uD560
+      \uB54C \uB9C8\uB2E4 30$\uB97C \uD68D\uB4DD\uD569\uB2C8\uB2E4"

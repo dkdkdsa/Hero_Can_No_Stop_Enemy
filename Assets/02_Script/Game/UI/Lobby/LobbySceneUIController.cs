@@ -28,7 +28,7 @@ public class LobbySceneUIController : NetworkBehaviour
 
         }
 
-        if (!IsHost)
+        if (IsClient && !IsServer)
         {
 
             NetworkManager.Singleton.OnClientStopped += HandleDisconnect;
@@ -72,6 +72,7 @@ public class LobbySceneUIController : NetworkBehaviour
     {
 
         base.OnDestroy();
+
         HostSingle.Instance.GameManager.OnPlayerConnect -= HandlePlayerConnect;
 
         if (IsHost)
@@ -81,7 +82,7 @@ public class LobbySceneUIController : NetworkBehaviour
 
         }
 
-        if (!IsHost)
+        if (IsClient && !IsServer)
         {
 
             NetworkManager.Singleton.OnClientStopped -= HandleDisconnect;

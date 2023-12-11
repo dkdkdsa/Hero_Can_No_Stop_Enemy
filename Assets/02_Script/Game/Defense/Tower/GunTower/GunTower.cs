@@ -70,6 +70,7 @@ public class GunTower : TowerRoot
             if (IsOwner)
             {
 
+                SoundManager.Instance.PlaySound("Shoot");
                 StartCoroutine(AttackDelayCo());
 
             }
