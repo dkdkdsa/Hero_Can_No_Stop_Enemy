@@ -33,7 +33,7 @@ public class GunAndGetMoneyTower : GunTower
             {
 
                 playerMoney.AddMoney(30);
-                FAED.TakePool<MoneyTextEffect>("MoneyText", transform.position + Vector3.up / 2).SetText(30);
+                FAED.TakePool<MoneyTextEffect>("MoneyText", transform.position + Vector3.up / 4).SetText(30);
                 attackCount = 0;
 
             }

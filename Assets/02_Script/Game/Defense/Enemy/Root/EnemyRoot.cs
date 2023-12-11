@@ -67,8 +67,8 @@ public class EnemyRoot : NetworkBehaviour
             if (OwnerClientId == NetworkManager.Singleton.LocalClientId)
             {
 
-                FindObjectOfType<PlayerMoney>()?.AddMoney((int)maxHP * 5);
-                FAED.TakePool<MoneyTextEffect>("MoneyText", transform.position).SetText((int)maxHP * 5);
+                FindObjectOfType<PlayerMoney>()?.AddMoney((int)maxHP * 2);
+                FAED.TakePool<MoneyTextEffect>("MoneyText", transform.position).SetText((int)maxHP * 2);
 
                 if (Random.value < 0.7f)
                 {

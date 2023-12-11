@@ -36,14 +36,17 @@ public class RoadEnd : MonoBehaviour
             var enemy = collision.transform.GetComponent<EnemyRoot>();
             hp -= enemy.maxHP / 2;
 
+
+            ulong owner = enemy.OwnerClientId;
+            enemy.DestroyObjectServerRPC();
+
             if(hp <= 0)
             {
 
-                DefenseManager.Instance.GameDieServerRPC(enemy.OwnerClientId);
+                DefenseManager.Instance.GameDieServerRPC(owner);
 
             }
 
-            enemy.DestroyObjectServerRPC();
 
         }
 

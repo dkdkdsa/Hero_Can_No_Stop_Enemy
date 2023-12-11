@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cdc49212cc650f4c82276729d17175b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <maxHP>k__BackingField: 400
+  <maxHP>k__BackingField: 2500
   moveSpeed: 3
 --- !u!95 &1046275189262839357
 Animator:

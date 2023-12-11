@@ -7,7 +7,7 @@ public delegate void OnMoneyValueChangeEvent(int changeValue);
 public class PlayerMoney : MonoBehaviour
 {
 
-    private int money = 60000;
+    private int money = 1200;
 
     public event OnMoneyValueChangeEvent OnMoneyChangeEvent;
     /// <summary>
